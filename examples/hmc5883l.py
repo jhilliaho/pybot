@@ -7,8 +7,6 @@ import math
 bus = smbus.SMBus(1)
 address = 0x1e
 
-openGY87();
-
 def read_byte(adr):
     return bus.read_byte_data(address, adr)
 
@@ -36,7 +34,7 @@ def openGY87():
 	ledout_values = [0x37, 0x02, 0x6A, 0x00, 0x6B, 0x00]
 	bus.write_i2c_block_data(DEVICE_ADDRESS, DEVICE_REG_LEDOUT0, ledout_values)
 
-
+openGY87();
 
 write_byte(0, 0b01110000) # Set to 8 samples @ 15Hz
 write_byte(1, 0b00100000) # 1.3 gain LSb / Gauss 1090 (default)
