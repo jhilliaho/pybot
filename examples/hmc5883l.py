@@ -34,7 +34,7 @@ def read_word_2c(adr):
         return val
 
 def write_byte(adr, value):
-    bus.write_byte_data(address, adr, value)
+    self.bus.write_byte_data(address, adr, value)
 
 def openGY87():
 	DEVICE_ADDRESS = 0x68
@@ -42,7 +42,7 @@ def openGY87():
 	DEVICE_REG_LEDOUT0 = 0x1d
 
 	ledout_values = [0x37, 0x02, 0x6A, 0x00, 0x6B, 0x00]
-	bus.write_i2c_block_data(DEVICE_ADDRESS, DEVICE_REG_LEDOUT0, ledout_values)
+	self.bus.write_i2c_block_data(DEVICE_ADDRESS, DEVICE_REG_LEDOUT0, ledout_values)
 
 def getDirection():
 	x_out = read_word_2c(3) * scale
