@@ -2,14 +2,12 @@
 import logging
 import time
 
-DEVICE_ADDRESS = 0x68
-DEVICE_REG_MODE1 = 0x00
-DEVICE_REG_LEDOUT0 = 0x1d
+#DEVICE_ADDRESS = 0x68
+#DEVICE_REG_MODE1 = 0x00
+#DEVICE_REG_LEDOUT0 = 0x1d
 
-ledout_values = [0x37, 0x02, 0x6A, 0x00, 0x6B, 0x00]
-self.bus.write_i2c_block_data(DEVICE_ADDRESS, DEVICE_REG_LEDOUT0, ledout_values)
-
-
+#ledout_values = [0x37, 0x02, 0x6A, 0x00, 0x6B, 0x00]
+#bus.write_i2c_block_data(DEVICE_ADDRESS, DEVICE_REG_LEDOUT0, ledout_values)
 
 # BMP085 default address.
 BMP085_I2CADDR           = 0x77
