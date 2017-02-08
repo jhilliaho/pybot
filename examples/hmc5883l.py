@@ -42,12 +42,14 @@ write_byte(2, 0b00000000) # Continuous sampling
 
 scale = 0.92
 
-x_out = read_word_2c(3) * scale
-y_out = read_word_2c(7) * scale
-z_out = read_word_2c(5) * scale
+while True:
 
-bearing  = math.atan2(y_out, x_out) 
-if (bearing < 0):
-    bearing += 2 * math.pi
+	x_out = read_word_2c(3) * scale
+	y_out = read_word_2c(7) * scale
+	z_out = read_word_2c(5) * scale
 
-print ("Bearing: ", math.degrees(bearing))
+	bearing  = math.atan2(y_out, x_out) 
+	if (bearing < 0):
+	    bearing += 2 * math.pi
+
+	print ("Bearing: ", math.degrees(bearing))
