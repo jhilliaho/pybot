@@ -1,8 +1,9 @@
 #!/usr/bin/python
+#
+
 import smbus
 import time
 import math
-
 
 bus = smbus.SMBus(1)
 address = 0x1e
@@ -53,3 +54,4 @@ while True:
 	    bearing += 2 * math.pi
 
 	print ("Bearing: ", math.degrees(bearing))
+	time.sleep(0.1)
