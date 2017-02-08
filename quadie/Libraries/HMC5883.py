@@ -65,38 +65,38 @@ class HMC5883:
     
     
     def __init__(self):
-	    """
-	    Constructor for Magentometer
-	    """
-	    self.hmc5883 = Adafruit_I2C(self.HMC58X3_ADDR,1)
-	    self.x_scale = 1.0
-	    self.y_scale = 1.0
-	    self.z_scale = 1.0
+        """
+        Constructor for Magentometer
+        """
+        self.hmc5883 = Adafruit_I2C(self.HMC58X3_ADDR,1)
+        self.x_scale = 1.0
+        self.y_scale = 1.0
+        self.z_scale = 1.0
 
     def init(self,setMode):
-	    """
-	    Initialize function 
-	    """
-	        #You need to wait at least 5ms after power on to initialize
-	    sleep(0.005)
-	    if(setMode):
-	        self.setMode(0)
+        """
+        Initialize function 
+        """
+            #You need to wait at least 5ms after power on to initialize
+        sleep(0.005)
+        if(setMode):
+            self.setMode(0)
 
 
-	    self.writeReg(self.HMC58X3_R_CONFA, 0x70)
-	    self.writeReg(self.HMC58X3_R_CONFB, 0xA0)
-	    self.writeReg(self.HMC58X3_R_MODE, 0x00)
+        self.writeReg(self.HMC58X3_R_CONFA, 0x70)
+        self.writeReg(self.HMC58X3_R_CONFB, 0xA0)
+        self.writeReg(self.HMC58X3_R_MODE, 0x00)
 
 
     def setMode(self,mode):
         """
-	    set mode of magnetometer
-	    """
-	    if(mode > 2):
-	        return 
-	        
-	    self.writeReg(self.HMC58X3_R_MODE,mode)
-	    sleep(0.1)
+        set mode of magnetometer
+        """
+        if(mode > 2):
+            return 
+            
+        self.writeReg(self.HMC58X3_R_MODE,mode)
+        sleep(0.1)
 
     def calibrate(self,gain,n_samples):
     """
@@ -189,43 +189,43 @@ class HMC5883:
 
 
     def calibrateSimple(self,gain):
-	    """
-	    Calibrate which has a few weaknesses
-	    1. Uses wrong gain for first reading
-	    2. Uses max instead ofo max of average when normalizing the axis to one another
-	    3.Doesn't use neg bias. (possible improvement in measurement)
-	    """
-	    self.writeReg(self.HMC58X3_R_CONFA, 0x010 + self.HMC_POS_BIAS) # Reg A DOR=0x010 + MS1, MS0 set to pos bias
-	    self.setGain(gain)
-	    mx = 0
-	    my = 0
-	    mz = 0
-	    t = 10
+        """
+        Calibrate which has a few weaknesses
+        1. Uses wrong gain for first reading
+        2. Uses max instead ofo max of average when normalizing the axis to one another
+        3.Doesn't use neg bias. (possible improvement in measurement)
+        """
+        self.writeReg(self.HMC58X3_R_CONFA, 0x010 + self.HMC_POS_BIAS) # Reg A DOR=0x010 + MS1, MS0 set to pos bias
+        self.setGain(gain)
+        mx = 0
+        my = 0
+        mz = 0
+        t = 10
 
-	    for i in range(t):
-	        self.setMode(1)
-	        x,y,z = self.getValues()
-	        if(x > mx):
-	            mx = x
-	        if(y > my):
-	        my = y
-	        if(z > mz):
-	        mz = z
+        for i in range(t):
+            self.setMode(1)
+            x,y,z = self.getValues()
+            if(x > mx):
+                mx = x
+            if(y > my):
+            my = y
+            if(z > mz):
+            mz = z
 
 
-	        max = 0
-	    if(mx > max):
-	            max = mx
-	    if(my > max):
-	        max = my
-	    if(mz > max):
-	        max = mz
+            max = 0
+        if(mx > max):
+                max = mx
+        if(my > max):
+            max = my
+        if(mz > max):
+            max = mz
 
-	    self.x_scale = max / mx
-	    self.y_scale = max / my
-	    self.z_scale = max / mz
+        self.x_scale = max / mx
+        self.y_scale = max / my
+        self.z_scale = max / mz
 
-	    self.writeReg(self.HMC58X3_R_CONFA, 0x010) #set regA/DOR back to default
+        self.writeReg(self.HMC58X3_R_CONFA, 0x010) #set regA/DOR back to default
     
     def setDOR(self,DOR):
         """
@@ -237,57 +237,57 @@ class HMC5883:
         self.writeReg(self.HMC58X3_R_CONFA,DOR<<2)
 
     def setGain(self,gain):
-	    """
-	    0-7 , 1 default
-	    """
-	    if(gain > 7):
-	        return 
-	        self.writeReg(self.HMC58X3_R_CONFB,gain<<5)
+        """
+        0-7 , 1 default
+        """
+        if(gain > 7):
+            return 
+            self.writeReg(self.HMC58X3_R_CONFB,gain<<5)
 
     def writeReg(self,reg,val):
-	    """
-	    write register
-	    """
-	    self.hmc5883.write8(reg,val)    
+        """
+        write register
+        """
+        self.hmc5883.write8(reg,val)    
 
     def getValues(self):
-	    """
-	    Get values from the magnetometer
-	    """
-	    xr,yr,zr = self.getRaw()
-	    x = xr / self.x_scale
-	    y = yr / self.y_scale
-	    z = zr / self.z_scale
+        """
+        Get values from the magnetometer
+        """
+        xr,yr,zr = self.getRaw()
+        x = xr / self.x_scale
+        y = yr / self.y_scale
+        z = zr / self.z_scale
 
-	    x = x + 0.5
-	    y = y + 0.5
-	    z = z + 0.5
+        x = x + 0.5
+        y = y + 0.5
+        z = z + 0.5
 
-	    return x,y,z
+        return x,y,z
 
     def getRaw(self):
         """
-	     Get Raw Values from the magnetoemeter
-	    """
-	    #wait hmc5883 to be ready
-	    #while not self.hmc5883.readU8(0x09)&0x01 == 1: pass
-	    #read hmc5883 magnetometer in gauss
-	    magx = (self.hmc5883.readS8(self.HMC58X3_R_XM) << 8) | self.hmc5883.readU8(self.HMC58X3_R_XL)
-	    magz = (self.hmc5883.readS8(self.HMC58X3_R_ZM) << 8) | self.hmc5883.readU8(self.HMC58X3_R_ZL)
-	    magy = (self.hmc5883.readS8(self.HMC58X3_R_YM) << 8) | self.hmc5883.readU8(self.HMC58X3_R_YL)
+         Get Raw Values from the magnetoemeter
+        """
+        #wait hmc5883 to be ready
+        #while not self.hmc5883.readU8(0x09)&0x01 == 1: pass
+        #read hmc5883 magnetometer in gauss
+        magx = (self.hmc5883.readS8(self.HMC58X3_R_XM) << 8) | self.hmc5883.readU8(self.HMC58X3_R_XL)
+        magz = (self.hmc5883.readS8(self.HMC58X3_R_ZM) << 8) | self.hmc5883.readU8(self.HMC58X3_R_ZL)
+        magy = (self.hmc5883.readS8(self.HMC58X3_R_YM) << 8) | self.hmc5883.readU8(self.HMC58X3_R_YL)
 
-	    return magx,magy,magz
+        return magx,magy,magz
 
 
     def getID(self):
-	    """
-	    Retrieve the value of the three ID registers 
-	    NOTE: both HMC5843 and HMC5883L have the same 'H43' identification register values.
-	    returns the three id register values
-	    """
-	    id = [0 for i in range(3)]
-	    id =self.hmc5883.readList(self.HMC58X3_R_IDA,3)
-	    return id[0],id[1],id[2]
+        """
+        Retrieve the value of the three ID registers 
+        NOTE: both HMC5843 and HMC5883L have the same 'H43' identification register values.
+        returns the three id register values
+        """
+        id = [0 for i in range(3)]
+        id =self.hmc5883.readList(self.HMC58X3_R_IDA,3)
+        return id[0],id[1],id[2]
 
 
 
