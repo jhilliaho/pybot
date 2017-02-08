@@ -10,6 +10,20 @@ import adabmp as BMP085
 #
 # For the Beaglebone Black the library will assume bus 1 by default, which is
 # exposed with SCL = P9_19 and SDA = P9_20.
+
+
+import smbus
+
+bus = smbus.SMBus(1)
+DEVICE_ADDRESS = 0x68
+DEVICE_REG_MODE1 = 0x00
+DEVICE_REG_LEDOUT0 = 0x1d
+ledout_values = [0x37, 0x02, 0x6A, 0x00, 0x6B, 0x00]
+bus.write_i2c_block_data(DEVICE_ADDRESS, DEVICE_REG_LEDOUT0, ledout_values)
+
+
+
+
 sensor = BMP085.BMP085()
 
 # Optionally you can override the bus number:
