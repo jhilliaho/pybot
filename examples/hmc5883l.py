@@ -59,4 +59,4 @@ if __name__ == "__main__":
 	com = compass()
 	for i in range(10):
 		print(com.getDirection())
-
+		sleep(0.2)
