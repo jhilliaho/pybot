@@ -7,8 +7,8 @@ import math
 
 class compass:
 	def __init__(self):
-		bus = smbus.SMBus(1)
-		address = 0x1e
+		self.bus = smbus.SMBus(1)
+		self.address = 0x1e
 
 		self.openGY87()
 
