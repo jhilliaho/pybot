@@ -9,7 +9,7 @@ z = [1,2]
 while 1:
 	data = sensor.get_accel_data()
 	print(data['x'])
-	x.extend(data['x'])
+	x.extend([data['x']])
 	if len(x) > 10:
 		x.pop(0)
 
