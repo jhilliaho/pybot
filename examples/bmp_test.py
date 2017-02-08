@@ -21,9 +21,6 @@ DEVICE_REG_LEDOUT0 = 0x1d
 ledout_values = [0x37, 0x02, 0x6A, 0x00, 0x6B, 0x00]
 bus.write_i2c_block_data(DEVICE_ADDRESS, DEVICE_REG_LEDOUT0, ledout_values)
 
-
-
-
 sensor = BMP085.BMP085()
 
 # Optionally you can override the bus number:

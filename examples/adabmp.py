@@ -10,7 +10,7 @@ import time
 #bus.write_i2c_block_data(DEVICE_ADDRESS, DEVICE_REG_LEDOUT0, ledout_values)
 
 # BMP085 default address.
-BMP085_I2CADDR           = 0x77
+BMP085_I2CADDR           = 0x68
 
 # Operating Modes
 BMP085_ULTRALOWPOWER     = 0
