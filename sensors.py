@@ -4,15 +4,15 @@ from RangeFinder import RangeFinder
 
 class Sensors:
 	def __init__(self):
-		self.compass = Compass()
+		self.Compass = Compass()
 		self.IMU = IMU()
 		self.RangeFinder = RangeFinder()
 
 	def updateSensorData(self):
-		self.range = RangeFinder.getRange()
-		self.direction = Compass.getDirection()
-		self.orientation = IMU.getGyroData()
-		self.acceleration = IMU.getAccelerationData()
+		self.range = self.RangeFinder.getRange()
+		self.direction = self.Compass.getDirection()
+		self.orientation = self.IMU.getGyroData()
+		self.acceleration = self.IMU.getAccelerationData()
 
 	def printAllSensorData(self):
 		self.updateSensorData()
