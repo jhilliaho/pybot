@@ -523,7 +523,7 @@ class MPU6050:
         return ax,ay,az
         returns gx,gy,gz
         """
-            ax = (self.mpu6050.readS8(0x3b)*256+self.mpu6050.readU8(0x3c))/16384.0
+        ax = (self.mpu6050.readS8(0x3b)*256+self.mpu6050.readU8(0x3c))/16384.0
         ay = (self.mpu6050.readS8(0x3d)*256+self.mpu6050.readU8(0x3e))/16384.0
         az = (self.mpu6050.readS8(0x3f)*256+self.mpu6050.readU8(0x40))/16384.0
         #read mpu6050 temperature in C
