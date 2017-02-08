@@ -1,4 +1,3 @@
 from Compass import Compass
-import IMU from IMU
-import RangeFinder from RangeFinder
-
+from IMU import IMU
+from RangeFinder import RangeFinder
