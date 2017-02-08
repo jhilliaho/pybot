@@ -161,7 +161,7 @@ class BMP085(object):
         B7 = (UP - B3) * (50000 >> self._mode)
         self._logger.debug('B7 = {0}'.format(B7))
         if B7 < 0x80000000:
-            p = (B7 * 2) / B4
+            p = (B7 * 2) // B4
         else:
             p = (B7 / B4) * 2
         X1 = (p >> 8) * (p >> 8)
