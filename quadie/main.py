@@ -11,7 +11,7 @@ import time
 import math
 import threading
 import logging
-from PWM import pwmMain as pwm
+#from PWM import pwmMain as pwm
 from Libraries import FreeIMU as FreeIMU
 from Libraries import controller as Controller
 from PID import pid as pid
