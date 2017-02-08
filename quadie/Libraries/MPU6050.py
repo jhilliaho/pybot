@@ -401,7 +401,6 @@ class MPU6050:
         """
         return current full-scale gyroscope range setting
         """
-    
    	    print(self.mpu6050.readU8(self.MPU60X0_RA_GYRO_CONFIG))
     
     def setFullScaleGyroRange(self,gyro_range):
