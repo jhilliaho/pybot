@@ -9,7 +9,7 @@
 import math
 from time import sleep
 from time import time
-from MPU6050 import MPU6050 as MPU6050
+import MPU6050
 from HMC5883 import HMC5883 as HMC5883
 from BMP180 import BMP180 as BMP180
 
