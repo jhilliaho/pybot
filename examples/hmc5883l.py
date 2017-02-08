@@ -6,7 +6,7 @@ import time
 import math
 
 class compass:
-	def __init__():
+	def __init__(self):
 		bus = smbus.SMBus(1)
 		address = 0x1e
 
