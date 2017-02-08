@@ -54,4 +54,4 @@ while True:
 	    bearing += 2 * math.pi
 
 	print ("Bearing: ", math.degrees(bearing))
-	time.sleep(0.1)
+	time.sleep(0.01)
