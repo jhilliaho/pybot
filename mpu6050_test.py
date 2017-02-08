@@ -8,7 +8,7 @@ class IMU:
 		self.sensor = mpu6050(0x68)
 
 	def getAllData(self):
-		data = sensor.get_all_data()
+		data = self.sensor.get_all_data()
 		self.acceleration = data[0]
 		self.gyro = data[1]
 		self.temperature = data[2]
