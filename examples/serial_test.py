@@ -9,7 +9,7 @@ print(ser.name)         # check which port was really used
 text = ''
 while 1:
 	line = ser.readline()
-	line = strip(line)
+	line = line.rstrip().lstrip()
 	print(line)
 
 ser.close()
