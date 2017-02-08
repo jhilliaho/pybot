@@ -385,154 +385,154 @@ class MPU6050:
 
     def __init__(self):
         """
-	    Constructor for MPU60X0 it will set tthe default address ,
-	    set the clock source to the gyroscopes x internal clock
-	    set the full scale ranges for both the gyro and accelerometer
-	    and take off sleep mode to get ready to use
-	    """
-	    
-	    self.mpu6050 = Adafruit_I2C(self.MPU60X0_DEFAULT_ADDRESS,1)
-	    self.setClockSource(self.MPU60X0_CLOCK_PLL_XGYRO)
-	    self.setFullScaleGyroRange(self.MPU60X0_GYRO_FS_250)
-	    self.setFullScaleAccelRange(self.MPU60X0_ACCEL_FS_2)
-	    self.setSleepEnabled(False)
+        Constructor for MPU60X0 it will set tthe default address ,
+        set the clock source to the gyroscopes x internal clock
+        set the full scale ranges for both the gyro and accelerometer
+        and take off sleep mode to get ready to use
+        """
+        
+        self.mpu6050 = Adafruit_I2C(self.MPU60X0_DEFAULT_ADDRESS,1)
+        self.setClockSource(self.MPU60X0_CLOCK_PLL_XGYRO)
+        self.setFullScaleGyroRange(self.MPU60X0_GYRO_FS_250)
+        self.setFullScaleAccelRange(self.MPU60X0_ACCEL_FS_2)
+        self.setSleepEnabled(False)
 
     def getFullScaleGyroRange(self):
         """
-	    return current full-scale gyroscope range setting
-	    """
+        return current full-scale gyroscope range setting
+        """
     
     print(self.mpu6050.readU8(self.MPU60X0_RA_GYRO_CONFIG))
     
     def setFullScaleGyroRange(self,gyro_range):
-	    """
-	    set full-scale gyroscope range
-	    if gyro-range is 0 full scale range is + - 250 degrees/sec
-	    if gyro-range is 1 full scale range is + - 500 degress/sec
-	    if gyro-range is 2 full scale range is + - 1000 degress/sec
-	    if gyro-range is 3 full scale range is + - 2000 degrees/sec
-	    """
+        """
+        set full-scale gyroscope range
+        if gyro-range is 0 full scale range is + - 250 degrees/sec
+        if gyro-range is 1 full scale range is + - 500 degress/sec
+        if gyro-range is 2 full scale range is + - 1000 degress/sec
+        if gyro-range is 3 full scale range is + - 2000 degrees/sec
+        """
 
-	    self.mpu6050.write8(self.MPU60X0_RA_GYRO_CONFIG ,gyro_range)
-	    print ("full-scale range changed to: %d" %gyro_range)
+        self.mpu6050.write8(self.MPU60X0_RA_GYRO_CONFIG ,gyro_range)
+        print ("full-scale range changed to: %d" %gyro_range)
 
     def setFullScaleAccelRange(self,accel_range):
-	    """
-	    set full-scale accelerometer range
-	    """
-	    
-	    self.mpu6050.write8(self.MPU60X0_RA_ACCEL_CONFIG,accel_range)
+        """
+        set full-scale accelerometer range
+        """
+        
+        self.mpu6050.write8(self.MPU60X0_RA_ACCEL_CONFIG,accel_range)
 
 
     def setClockSource(self,source):
-	    """
-	    Set clock source and therefore the speed
-	    Last 3 bits are the clock sel of this register
-	    if 0 then internal clock 8Mhz
-	    if 1 then PLL with x axis gyroscope reference
-	    if 2 then PLL with y axis gyroscope reference
-	    if 3 then PLL with z axis gyroscope reference
-	    if 4 then PLL with external 32.768kHz reference
-	    if 5 then PLL with external 19.2MHz reference 
-	    6 is reserved
-	    if 7 then stops the clock and keeps the timing generator in reset
-	    """
+        """
+        Set clock source and therefore the speed
+        Last 3 bits are the clock sel of this register
+        if 0 then internal clock 8Mhz
+        if 1 then PLL with x axis gyroscope reference
+        if 2 then PLL with y axis gyroscope reference
+        if 3 then PLL with z axis gyroscope reference
+        if 4 then PLL with external 32.768kHz reference
+        if 5 then PLL with external 19.2MHz reference 
+        6 is reserved
+        if 7 then stops the clock and keeps the timing generator in reset
+        """
 
-	    self.mpu6050.write8(self.MPU60X0_RA_PWR_MGMT_1,source)
+        self.mpu6050.write8(self.MPU60X0_RA_PWR_MGMT_1,source)
 
 
     def getClockSource(self):
-	    """
-	    get clock source and therefore speed
-	    Last 3 bits are the clock sel of this register
-	    if 0 then internal clock 8Mhz
-	    if 1 then PLL with x axis gyroscope reference
-	    if 2 then PLL with y axis gyroscope reference
-	    if 3 then PLL with z axis gyroscope reference
-	    if 4 then PLL with external 32.768kHz reference
-	    if 5 then PLL with external 19.2MHz reference 
-	    6 is reserved
-	    if 7 then stops the clock and keeps the timing generator in reset
-	    """
+        """
+        get clock source and therefore speed
+        Last 3 bits are the clock sel of this register
+        if 0 then internal clock 8Mhz
+        if 1 then PLL with x axis gyroscope reference
+        if 2 then PLL with y axis gyroscope reference
+        if 3 then PLL with z axis gyroscope reference
+        if 4 then PLL with external 32.768kHz reference
+        if 5 then PLL with external 19.2MHz reference 
+        6 is reserved
+        if 7 then stops the clock and keeps the timing generator in reset
+        """
 
-	    return self.mpu6050.readU8(self.MPU60X0_RA_PWR_MGMT_1) - 240
+        return self.mpu6050.readU8(self.MPU60X0_RA_PWR_MGMT_1) - 240
     
     
     def setSleepEnabled(self,state):
         """
-	    set sleep mode status
-	    register that allows to set a sleep mode
-	    the bit is 6
-	    if 1 then SLEEP mode
-	    if 0 then AWAKE mode
-	    """
-	    if(state):
-	        self.mpu6050.write8(self.MPU60X0_RA_PWR_MGMT_1,0x01)
-	    else:
-	        self.mpu6050.write8(self.MPU60X0_RA_PWR_MGMT_1,0x00)
+        set sleep mode status
+        register that allows to set a sleep mode
+        the bit is 6
+        if 1 then SLEEP mode
+        if 0 then AWAKE mode
+        """
+        if(state):
+            self.mpu6050.write8(self.MPU60X0_RA_PWR_MGMT_1,0x01)
+        else:
+            self.mpu6050.write8(self.MPU60X0_RA_PWR_MGMT_1,0x00)
     
     def setI2CBypassEnabled(self,state):
-	    """
-	    When state equal to 0x02 and I2C_MST_EN is 0
-	    the host app processor will be able to directly access the aux I2C bus of the MPU
-	    when this bit is 0 the host app will not be able to acces the aux I2C bus
-	    regardless of the state of I2C_MST_EN
-	    """
-	    if(state):
-	        self.mpu6050.write8(self.MPU60X0_RA_INT_PIN_CFG,0x02)
-	    else:
-	            self.mpu6050.write8(self.MPU60X0_RA_INT_PIN_CFG,0x00)
+        """
+        When state equal to 0x02 and I2C_MST_EN is 0
+        the host app processor will be able to directly access the aux I2C bus of the MPU
+        when this bit is 0 the host app will not be able to acces the aux I2C bus
+        regardless of the state of I2C_MST_EN
+        """
+        if(state):
+            self.mpu6050.write8(self.MPU60X0_RA_INT_PIN_CFG,0x02)
+        else:
+                self.mpu6050.write8(self.MPU60X0_RA_INT_PIN_CFG,0x00)
 
     
     def setI2CMasterModeEnabled(self,state):
-	    """
-	     This register allows the user to enable and disable the FIFO buffer,
-	    I2C Master Mode and primary I2C interface
-	    When set to 0x00 FIFO diabled, Master Mode disabled, SPI is disabled
-	    When set to 0x20 FIFO disabled, Master Mode Enabled, SPI disabled
-	    """
-	    if(state):
-	        self.mpu6050.write8(self.MPU60X0_RA_USER_CTRL,0x20)
-	    else:
-	            self.mpu6050.write8(self.MPU60X0_RA_USER_CTRL,0x00)
+        """
+         This register allows the user to enable and disable the FIFO buffer,
+        I2C Master Mode and primary I2C interface
+        When set to 0x00 FIFO diabled, Master Mode disabled, SPI is disabled
+        When set to 0x20 FIFO disabled, Master Mode Enabled, SPI disabled
+        """
+        if(state):
+            self.mpu6050.write8(self.MPU60X0_RA_USER_CTRL,0x20)
+        else:
+                self.mpu6050.write8(self.MPU60X0_RA_USER_CTRL,0x00)
 
     def getMotion6(self):
-	    """
-	    Get raw 6-axis motion sensor readings
-	    Return ax,ay,az in m/s^2
-	    Returns gx,gy,gz in degree/s
-	    """
+        """
+        Get raw 6-axis motion sensor readings
+        Return ax,ay,az in m/s^2
+        Returns gx,gy,gz in degree/s
+        """
 
-	    ax = (self.mpu6050.readS8(self.MPU60X0_RA_ACCEL_XOUT_H) << 8) | self.mpu6050.readU8(self.MPU60X0_RA_ACCEL_XOUT_L)
-	    
-	    ay = (self.mpu6050.readS8(self.MPU60X0_RA_ACCEL_YOUT_H) << 8) | self.mpu6050.readU8(self.MPU60X0_RA_ACCEL_YOUT_L)
-	    
-	    az = (self.mpu6050.readS8(self.MPU60X0_RA_ACCEL_ZOUT_H) << 8) | self.mpu6050.readU8(self.MPU60X0_RA_ACCEL_ZOUT_L)
+        ax = (self.mpu6050.readS8(self.MPU60X0_RA_ACCEL_XOUT_H) << 8) | self.mpu6050.readU8(self.MPU60X0_RA_ACCEL_XOUT_L)
+        
+        ay = (self.mpu6050.readS8(self.MPU60X0_RA_ACCEL_YOUT_H) << 8) | self.mpu6050.readU8(self.MPU60X0_RA_ACCEL_YOUT_L)
+        
+        az = (self.mpu6050.readS8(self.MPU60X0_RA_ACCEL_ZOUT_H) << 8) | self.mpu6050.readU8(self.MPU60X0_RA_ACCEL_ZOUT_L)
 
-	    gx = (self.mpu6050.readS8(self.MPU60X0_RA_GYRO_XOUT_H) << 8) | self.mpu6050.readU8(self.MPU60X0_RA_GYRO_XOUT_L)
+        gx = (self.mpu6050.readS8(self.MPU60X0_RA_GYRO_XOUT_H) << 8) | self.mpu6050.readU8(self.MPU60X0_RA_GYRO_XOUT_L)
 
-	    gy = (self.mpu6050.readS8(self.MPU60X0_RA_GYRO_YOUT_H) << 8) | self.mpu6050.readU8(self.MPU60X0_RA_GYRO_YOUT_L)
+        gy = (self.mpu6050.readS8(self.MPU60X0_RA_GYRO_YOUT_H) << 8) | self.mpu6050.readU8(self.MPU60X0_RA_GYRO_YOUT_L)
 
-	    gz = (self.mpu6050.readS8(self.MPU60X0_RA_GYRO_ZOUT_H) << 8) | self.mpu6050.readU8(self.MPU60X0_RA_GYRO_ZOUT_L)
+        gz = (self.mpu6050.readS8(self.MPU60X0_RA_GYRO_ZOUT_H) << 8) | self.mpu6050.readU8(self.MPU60X0_RA_GYRO_ZOUT_L)
 
-	    return ax,ay,az,gx,gy,gz
+        return ax,ay,az,gx,gy,gz
 
     def getMotion6original(self):
-	    """
-	    Get raw 6 axis motion sensor readings
-	    return ax,ay,az
-	    returns gx,gy,gz
-	    """
-	        ax = (self.mpu6050.readS8(0x3b)*256+self.mpu6050.readU8(0x3c))/16384.0
-	    ay = (self.mpu6050.readS8(0x3d)*256+self.mpu6050.readU8(0x3e))/16384.0
-	    az = (self.mpu6050.readS8(0x3f)*256+self.mpu6050.readU8(0x40))/16384.0
-	    #read mpu6050 temperature in C
-	    #tt = (mpu6050.readS8(0x41)*256+mpu6050.readU8(0x42))/340.0 + 36.53
-	    #read mpu6050 gyroscope in degree/s
-	    gx = (self.mpu6050.readS8(0x43)*256+self.mpu6050.readU8(0x44))/131.0
-	    gy = (self.mpu6050.readS8(0x45)*256+self.mpu6050.readU8(0x46))/131.0
-	    gz = (self.mpu6050.readS8(0x47)*256+self.mpu6050.readU8(0x48))/131.0
+        """
+        Get raw 6 axis motion sensor readings
+        return ax,ay,az
+        returns gx,gy,gz
+        """
+            ax = (self.mpu6050.readS8(0x3b)*256+self.mpu6050.readU8(0x3c))/16384.0
+        ay = (self.mpu6050.readS8(0x3d)*256+self.mpu6050.readU8(0x3e))/16384.0
+        az = (self.mpu6050.readS8(0x3f)*256+self.mpu6050.readU8(0x40))/16384.0
+        #read mpu6050 temperature in C
+        #tt = (mpu6050.readS8(0x41)*256+mpu6050.readU8(0x42))/340.0 + 36.53
+        #read mpu6050 gyroscope in degree/s
+        gx = (self.mpu6050.readS8(0x43)*256+self.mpu6050.readU8(0x44))/131.0
+        gy = (self.mpu6050.readS8(0x45)*256+self.mpu6050.readU8(0x46))/131.0
+        gz = (self.mpu6050.readS8(0x47)*256+self.mpu6050.readU8(0x48))/131.0
 
 
-	    return ax,ay,az,gx,gy,gz
+        return ax,ay,az,gx,gy,gz
 
