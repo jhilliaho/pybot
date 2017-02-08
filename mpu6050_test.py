@@ -13,11 +13,11 @@ class IMU:
 		self.gyro = data[1]
 		self.temperature = data[2]
 
-	def getAccelerationData():
+	def getAccelerationData(self):
 		self.getAllData()
 		return self.acceleration
 
-	def getGyroData():
+	def getGyroData(self):
 		self.getAllData()
 		return self.acceleration
 
