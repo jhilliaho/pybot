@@ -11,9 +11,9 @@ class Compass:
 
 		self.openGY87()
 
-		#self.write_byte(0, 0b01111000) # Set to 8 samples @ 75Hz
-		#self.write_byte(1, 0b00100000) # 1.3 gain LSb / Gauss 1090 (default)
-		#self.write_byte(2, 0b00000000) # Continuous sampling
+		self.write_byte(0, 0b01111000) # Set to 8 samples @ 75Hz
+		self.write_byte(1, 0b00100000) # 1.3 gain LSb / Gauss 1090 (default)
+		self.write_byte(2, 0b00000000) # Continuous sampling
 		self.scale = 0.92
 
 	def read_byte(self, adr):
