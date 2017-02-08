@@ -5,7 +5,9 @@ class RangeFinder:
 		self.device = serial.Serial(port='/dev/ttyUSB0', baudrate=115200, timeout=0.1)
 
 	def getRange(self):
-		return int(self.device.readline())
+		line = self.device.readline()
+		line = int(line)
+		return line
 
 	def closeSerial(self):
 		self.device.close()
