@@ -153,8 +153,8 @@ class BMP085(object):
         X3 = X1 + X2
         B3 = (((self.cal_AC1 * 4 + X3) << self._mode) + 2) / 4
         self._logger.debug('B3 = {0}'.format(B3))
-        X1 = (self.cal_AC3 * B6) >> 13
-        X2 = (self.cal_B1 * ((B6 * B6) >> 12)) >> 16
+        X1 = int(self.cal_AC3 * B6) >> 13
+        X2 = int(self.cal_B1 * ((B6 * B6) >> 12)) >> 16
         X3 = ((X1 + X2) + 2) >> 2
         B4 = (self.cal_AC4 * (X3 + 32768)) >> 15
         self._logger.debug('B4 = {0}'.format(B4))
