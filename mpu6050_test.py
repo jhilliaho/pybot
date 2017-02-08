@@ -10,8 +10,8 @@ while 1:
 	data = sensor.get_all_data()
 	
 	print(data)
-	print("\r\n")
-	print("\r\n")
+	print("\n")
+	print("\n")
 
 class imu:
 	def __init__(self):
