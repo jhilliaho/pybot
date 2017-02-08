@@ -53,7 +53,7 @@ class compass:
 		if (bearing < 0):
 		    bearing += 2 * math.pi
 
-		return round(math.degrees(bearing), 1)
+		return round(math.degrees(bearing), 2)
 
 if __name__ == "__main__":
 	com = compass()
