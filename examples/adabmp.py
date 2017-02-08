@@ -149,7 +149,7 @@ class BMP085(object):
         B6 = B5 - 4000
         self._logger.debug('B6 = {0}'.format(B6))
         X1 = int(int(self.cal_B2 * (B6 * B6)) >> 12) >> 11
-        X2 = (self.cal_AC2 * B6) >> 11
+        X2 = int(self.cal_AC2 * B6) >> 11
         X3 = X1 + X2
         B3 = (((self.cal_AC1 * 4 + X3) << self._mode) + 2) / 4
         self._logger.debug('B3 = {0}'.format(B3))
