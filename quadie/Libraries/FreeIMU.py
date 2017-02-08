@@ -41,9 +41,9 @@ class FreeIMU:
     now = 0.0
 
     ######################################################################
-    #           							 #
-    #                           CONSTRUCTOR				 #
-    #									 #
+    #                                        #
+    #                           CONSTRUCTOR                 #
+    #                                     #
     ######################################################################
     def __init__(self):
         
@@ -87,9 +87,9 @@ class FreeIMU:
         #callLoad()
          
     #######################################################################################
-    #										          #
-    #                                Get Raw Values					  #
-    #											  #
+    #                                                  #
+    #                                Get Raw Values                      #
+    #                                              #
     #######################################################################################
     def getRawValues(self):
         raw_values = [0 for i in range(11)]
@@ -101,9 +101,9 @@ class FreeIMU:
         return raw_values[0],raw_values[1],raw_values[2],raw_values[3],raw_values[4],raw_values[5],raw_values[6],raw_values[7],raw_values[8],raw_values[9],raw_values[10]
 
     ######################################################################################
-    #											 #
-    #                               Get Values 						 #
-    #											 #
+    #                                             #
+    #                               Get Values                          #
+    #                                             #
     ######################################################################################
     def getValues(self):
 
@@ -139,12 +139,12 @@ class FreeIMU:
         return values[0],values[1],values[2],values[3],values[4],values[5],values[6],values[7],values[8]
 
     ########################################################################################
-    #											   #
-    #                                  Zero Gyro					   #
-    #											   #
+    #                                               #
+    #                                  Zero Gyro                       #
+    #                                               #
     ########################################################################################
     def zeroGyro(self):
-    	"computes gyros offsets"
+        "computes gyros offsets"
         totSamples = 3
         tmpOffsets = [0 for i in range(3)]
         raw = [0 for i in range(11)]
@@ -159,11 +159,11 @@ class FreeIMU:
         self.gyro_off_x = tmpOffsets[0] / totSamples
         self.gyro_off_y = tmpOffsets[1] / totSamples
         self.gyro_off_z = tmpOffsets[2] / totSamples
-	
+    
     #######################################################################################
-    #											  #
+    #                                              #
     #                                     AHRS upate                                      #
-    #											  #
+    #                                              #
     #######################################################################################
     def AHRSupdate(self,gx,gy,gz,ax,ay,az,mx,my,mz):
         """
@@ -217,7 +217,7 @@ class FreeIMU:
             halfey = (mz * halfwx - mx * halfwz)
             halfez = (mx * halfwy - my * halfwx)
 
-            #Compute feedback only if accelerometer measurements valid (avoids NaN in accelerometer normalization)		
+            #Compute feedback only if accelerometer measurements valid (avoids NaN in accelerometer normalization)        
         if ax != 0.0 and ay != 0.0 and az != 0.0:
             #Normalise accelerometer measurement
             recipNorm = (ax * ax + ay * ay + az * az)**-0.5
@@ -283,9 +283,9 @@ class FreeIMU:
         self.q3 *= recipNorm
 
     ###########################################################################################
-    #											      #
-    #						get Q					      #
-    #											      #
+    #                                                  #
+    #                        get Q                          #
+    #                                                  #
     ###########################################################################################
     def getQ(self):
         """
@@ -315,9 +315,9 @@ class FreeIMU:
 
 
     ###########################################################################################
-    #											      #
-    #					get Barometer Altitude 				      #
-    #											      #
+    #                                                  #
+    #                    get Barometer Altitude                       #
+    #                                                  #
     ###########################################################################################
     def getBaroAlti(self,sea_press):
         """
@@ -329,9 +329,9 @@ class FreeIMU:
         return ((pow((sea_press / press), 1/5.257) - 1.0) * (temp + 273.15)) / 0.0065
     
     #########################################################################################
-    #											    #
-    #				get Barometer altitude					    #
-    #											    #
+    #                                                #
+    #                get Barometer altitude                        #
+    #                                                #
     #########################################################################################
     def getBaroAlt(self):
         """
@@ -341,9 +341,9 @@ class FreeIMU:
         return self.getBaroAlti(self.sea_press);
 
     ##########################################################################################
-    #											     #
-    #				gravity Compensate accel				     #
-    #											     #
+    #                                                 #
+    #                gravity Compensate accel                     #
+    #                                                 #
     ##########################################################################################
     def gravityCompensateAcc(self,acc,q):
         """
@@ -366,9 +366,9 @@ class FreeIMU:
         return acc[0],acc[1],acc[2]
 
     ##########################################################################################
-    #											     #
-    #				Get Euler In Radians					     #
-    #											     #
+    #                                                 #
+    #                Get Euler In Radians                         #
+    #                                                 #
     ##########################################################################################
     def getEulerRad(self):
         """
@@ -388,9 +388,9 @@ class FreeIMU:
         return angles[0],angles[1],angles[2]
 
     ########################################################################################
-    #											   #
-    #				    Get Euler						   #
-    #											   #
+    #                                               #
+    #                    Get Euler                           #
+    #                                               #
     ########################################################################################
     def getEuler(self):
         """
@@ -407,9 +407,9 @@ class FreeIMU:
         return angles[0],angles[1],angles[2]
 
     ########################################################################################
-    #											   #
-    #				   Get Yaw Pitch Roll in Radians			   #
-    #											   #
+    #                                               #
+    #                   Get Yaw Pitch Roll in Radians               #
+    #                                               #
     ########################################################################################
     def getYawPitchRollRad(self):
         """
@@ -432,11 +432,11 @@ class FreeIMU:
         ypr[2] = math.atan(gy / math.sqrt(gx * gx + gz * gz))
 
         return ypr[0],ypr[1],ypr[2]
-	
+    
     ########################################################################################
-    #										  	   #
-    #				   get Yaw Pitch Roll in Degrees			   #
-    #											   #
+    #                                                 #
+    #                   get Yaw Pitch Roll in Degrees               #
+    #                                               #
     ########################################################################################
     def getYawPitchRoll(self):
         """
@@ -452,9 +452,9 @@ class FreeIMU:
         return ypr[0],ypr[1],ypr[2]
 
     #######################################################################################
-    #											  #
-    #                            Array of radians to degrees				  #
-    #											  #
+    #                                              #
+    #                            Array of radians to degrees                  #
+    #                                              #
     #######################################################################################
     def arr3_rad_to_deg(self,arr):
         """
