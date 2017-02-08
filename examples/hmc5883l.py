@@ -18,23 +18,23 @@ class compass:
 		self.scale = 0.92
 
 	def read_byte(self, adr):
-	    return bus.read_byte_data(address, adr)
+	    return self.bus.read_byte_data(address, adr)
 
 	def read_word(self, adr):
-	    high = bus.read_byte_data(address, adr)
-	    low = bus.read_byte_data(address, adr+1)
+	    high = self.bus.read_byte_data(self.address, adr)
+	    low = self.bus.read_byte_data(self.address, adr+1)
 	    val = (high << 8) + low
 	    return val
 
 	def read_word_2c(self, adr):
-	    val = read_word(adr)
+	    val = self.read_word(adr)
 	    if (val >= 0x8000):
 	        return -((65535 - val) + 1)
 	    else:
 	        return val
 
 	def write_byte(self, adr, value):
-	    self.bus.write_byte_data(address, adr, value)
+	    self.bus.write_byte_data(self.address, adr, value)
 
 	def openGY87(self):
 		DEVICE_ADDRESS = 0x68
@@ -45,9 +45,9 @@ class compass:
 		self.bus.write_i2c_block_data(DEVICE_ADDRESS, DEVICE_REG_LEDOUT0, ledout_values)
 
 	def getDirection(self):
-		x_out = read_word_2c(3) * scale
-		y_out = read_word_2c(7) * scale
-		z_out = read_word_2c(5) * scale
+		x_out = self.read_word_2c(3) * self.scale
+		y_out = self.read_word_2c(7) * self.scale
+		z_out = self.read_word_2c(5) * self.scale
 
 		bearing  = math.atan2(y_out, x_out) 
 		if (bearing < 0):
