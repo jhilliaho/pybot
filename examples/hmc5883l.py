@@ -37,7 +37,7 @@ def openGY87():
 
 openGY87();
 
-write_byte(0, 0b01111000) # Set to 8 samples @ 75Hz
+write_byte(0, 0b00011000) # Set to 8 samples @ 75Hz
 write_byte(1, 0b00100000) # 1.3 gain LSb / Gauss 1090 (default)
 write_byte(2, 0b00000000) # Continuous sampling
 
