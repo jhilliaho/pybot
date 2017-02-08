@@ -98,93 +98,91 @@ class HMC5883:
         self.writeReg(self.HMC58X3_R_MODE,mode)
         sleep(0.1)
 
-    def calibrate(self,gain,n_samples):
-	    """
-	    Calibrate using the self test operation 
-	    Average the values using bias mode to obtain the scale factors.
-	    return: returns false if any of the following occurs:
-	    invalid input parameters. (gain >7 or n_samples = 0)
-	    Id registers are wrong for the compiled device. Unfortunately, we cant distinguish between HMC5883l and 5843
-	    calibration saturates during the positive or neagative bias on any of the readings
-	    Readings are outside of the expected range for bias current
-	    """
-	    bret = True
-	    xyz_total = [0 for i in range(3)]
-	    if((7> gain and 0 < n_samples)):
-	        self.writeReg(self.HMC58X3_R_CONFA, 0x010 + self.HMC_POS_BIAS)
-	        #Note that the  very first measurement after a gain change maintains the same gain as the previous setting.The new gain setting is effective from the second measurement and on.
-	        self.setGain(gain)
-	        self.setMode(1)
-	        xyz = [0 for i in range(3)] #change to single measurement mode
-	        xyz[0],xyz[1],xyz[2] = self.getRaw() #get the raw values and ignore since this reading may use previous gain
+def calibrate(self,gain,n_samples):
+	"""
+	Calibrate using the self test operation 
+	Average the values using bias mode to obtain the scale factors.
+	return: returns false if any of the following occurs:
+	invalid input parameters. (gain >7 or n_samples = 0)
+	Id registers are wrong for the compiled device. Unfortunately, we cant distinguish between HMC5883l and 5843
+	calibration saturates during the positive or neagative bias on any of the readings	
+	Readings are outside of the expected range for bias current
+	"""
+	bret = True
+	xyz_total = [0 for i in range(3)]
+	if((7> gain and 0 < n_samples)):
+	    self.writeReg(self.HMC58X3_R_CONFA, 0x010 + self.HMC_POS_BIAS)
+	    #Note that the  very first measurement after a gain change maintains the same gain as the previous setting.The new gain setting is effective from the second measurement and on.
+	    self.setGain(gain)
+	    self.setMode(1)
+	    xyz = [0 for i in range(3)] #change to single measurement mode
+	    xyz[0],xyz[1],xyz[2] = self.getRaw() #get the raw values and ignore since this reading may use previous gain
 
-	        for i in range(n_samples):
-	        self.setMode(1)
-	        xyz[0],xyz[1],xyz[2] = self.getRaw()
-	        #Since the measurements are noisy they should be averaged rather than taking the max
+	    for i in range(n_samples):
+			self.setMode(1)
+			xyz[0],xyz[1],xyz[2] = self.getRaw()
+			#Since the measurements are noisy they should be averaged rather than taking the max
 
-	        xyz_total[0] += xyz[0]
-	        xyz_total[1] += xyz[1]
-	        xyz_total[2] += xyz[2]
-	        #detect saturation
+		xyz_total[0] += xyz[0]
+		xyz_total[1] += xyz[1]
+		xyz_total[2] += xyz[2]
+		#detect saturation
 
-	        if(-(1 << 12) >= min(xyz[0],min(xyz[1],xyz[2]))):
-	            print "HMC58x3 Self test saturated. Increase range."
-	            bret = False
-	            break
-	        #apply the negative bias (same gain)
+		if(-(1 << 12) >= min(xyz[0],min(xyz[1],xyz[2]))):
+		    print "HMC58x3 Self test saturated. Increase range."
+		    bret = False
+		    break
+	    #apply the negative bias (same gain)
 
-	        self.writeReg(self.HMC58X3_R_CONFA, 0x010 + self.HMC_NEG_BIAS)
-	        for i in range(n_samples):
-	        self.setMode(1)
-	        xyz[0],xyz[1],xyz[2] = self.getRaw()
-
-
-	        #Since the measurements are noisy they should be averaged rather than taking the max
-
-	        xyz_total[0] -= xyz[0]
-	        xyz_total[1] -= xyz[1]
-	        xyz_total[2] -= xyz[2]
-	        #detect saturation
-
-	        if(-(1 << 12) >= min(xyz[0],min(xyz[1],xyz[2]))):
-	            print "HMC58x3 Self test saturated. Increase range."
-	            bret = False
-	            break
-	        #compare the values against the expected self test bias gauss
-	        #notice same limits are applied to all axis
-
-	        low_limit = self.SELF_TEST_LOW_LIMIT * self.counts_per_milligauss[gain] * 2* n_samples
-	        high_limit = self.SELF_TEST_HIGH_LIMIT * self.counts_per_milligauss[gain] * 2 * n_samples
-	        #print "running self test of magnetometer..."
-	        #for debug purposes
-	        #print "Low limit is : %f"%low_limit
-	        #print "High limit is : %f"%high_limit
-	        #print "bret is = %s" %bret
-	        #print "xyz limits should be between both low-limit and high limit"
-	        #print "xyz[0] = %f  xyz[1]  = %f   xyz[2]  = %f"%(xyz_total[0],xyz_total[1],xyz_total[2])
-	        if((bret == True) and
-	        (low_limit <= xyz_total[0]) and (high_limit >= xyz_total[0]) and
-	        (low_limit <= xyz_total[1]) and (high_limit >= xyz_total[1]) and 
-	        (low_limit <= xyz_total[2]) and (high_limit >= xyz_total[2])):
-	        #Succesful calibration
-	        #Normalize the scale factors so all axis return the same range of values for the bias field
-	        #Factor of 2 is from summation of total of n_samples from both positive and negative bias
-	        self.x_scale = (self.counts_per_milligauss[gain] * (self.HMC58X3_X_SELF_TEST_GAUSS * 2)) / (xyz_total[0]/ n_samples)
-	        self.y_scale = (self.counts_per_milligauss[gain] * (self.HMC58X3_Y_SELF_TEST_GAUSS * 2)) / (xyz_total[1] / n_samples)
-	        self.z_scale = (self.counts_per_milligauss[gain] * (self.HMC58X3_Z_SELF_TEST_GAUSS * 2)) / (xyz_total[2] / n_samples)
-	            print "self test ran succesfully, storing scale values"
-	        else:
-	        print"HMC5883 self test out of range"
-	        bret = False
-
-	        self.writeReg(self.HMC58X3_R_CONFA, 0x010)
-	        else:
-	        print "HMC5883 bad parameters"
-	        bret = False
-	        return bret
+	    self.writeReg(self.HMC58X3_R_CONFA, 0x010 + self.HMC_NEG_BIAS)
+	    for i in range(n_samples):
+		self.setMode(1)
+		xyz[0],xyz[1],xyz[2] = self.getRaw()
 
 
+		#Since the measurements are noisy they should be averaged rather than taking the max
+
+		xyz_total[0] -= xyz[0]
+		xyz_total[1] -= xyz[1]
+		xyz_total[2] -= xyz[2]
+		#detect saturation
+
+		if(-(1 << 12) >= min(xyz[0],min(xyz[1],xyz[2]))):
+		    print "HMC58x3 Self test saturated. Increase range."
+		    bret = False
+		    break
+		#compare the values against the expected self test bias gauss
+		#notice same limits are applied to all axis
+
+		low_limit = self.SELF_TEST_LOW_LIMIT * self.counts_per_milligauss[gain] * 2* n_samples
+		high_limit = self.SELF_TEST_HIGH_LIMIT * self.counts_per_milligauss[gain] * 2 * n_samples
+		#print "running self test of magnetometer..."
+		#for debug purposes
+		#print "Low limit is : %f"%low_limit
+		#print "High limit is : %f"%high_limit
+		#print "bret is = %s" %bret
+		#print "xyz limits should be between both low-limit and high limit"
+		#print "xyz[0] = %f  xyz[1]  = %f   xyz[2]  = %f"%(xyz_total[0],xyz_total[1],xyz_total[2])
+	    if((bret == True) and
+		(low_limit <= xyz_total[0]) and (high_limit >= xyz_total[0]) and
+		(low_limit <= xyz_total[1]) and (high_limit >= xyz_total[1]) and 
+		(low_limit <= xyz_total[2]) and (high_limit >= xyz_total[2])):
+		#Succesful calibration
+		#Normalize the scale factors so all axis return the same range of values for the bias field
+		#Factor of 2 is from summation of total of n_samples from both positive and negative bias
+		self.x_scale = (self.counts_per_milligauss[gain] * (self.HMC58X3_X_SELF_TEST_GAUSS * 2)) / (xyz_total[0]/ n_samples)
+		self.y_scale = (self.counts_per_milligauss[gain] * (self.HMC58X3_Y_SELF_TEST_GAUSS * 2)) / (xyz_total[1] / n_samples)
+		self.z_scale = (self.counts_per_milligauss[gain] * (self.HMC58X3_Z_SELF_TEST_GAUSS * 2)) / (xyz_total[2] / n_samples)
+	        print "self test ran succesfully, storing scale values"
+	    else:
+		print"HMC5883 self test out of range"
+		bret = False
+
+	    self.writeReg(self.HMC58X3_R_CONFA, 0x010)
+        else:
+	    print "HMC5883 bad parameters"
+	    bret = False
+        return bret
 
 
 
