@@ -13,4 +13,4 @@ while 1:
 	if len(x) > 100:
 		x.pop(0)
 
-	print(len(x), "   -   ", sum(x)/len(x))
+	print(data['x'], " - ", sum(x)/len(x))
