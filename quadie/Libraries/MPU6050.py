@@ -6,7 +6,7 @@
 #   term: Winter 2015
 #   Date: 3-27-2015
 #############################################################################################
-from Adafruit_I2C import Adafruit_I2C
+from Libraries import Adafruit_I2C
 
 
 class MPU6050:
