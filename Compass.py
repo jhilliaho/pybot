@@ -10,7 +10,7 @@ class Compass:
 		self.address = 0x1e
 
 		self.openGY87()
-
+		time.sleep(0.5)
 		self.write_byte(0, 0b01111000) # Set to 8 samples @ 75Hz
 		self.write_byte(1, 0b00100000) # 1.3 gain LSb / Gauss 1090 (default)
 		self.write_byte(2, 0b00000000) # Continuous sampling
@@ -37,7 +37,6 @@ class Compass:
 
 	def openGY87(self):
 		DEVICE_ADDRESS = 0x68
-		DEVICE_REG_MODE1 = 0x00
 		DEVICE_REG_LEDOUT0 = 0x1d
 
 		ledout_values = [0x37, 0x02, 0x6A, 0x00, 0x6B, 0x00]
