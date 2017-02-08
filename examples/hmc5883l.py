@@ -17,26 +17,26 @@ class compass:
 		write_byte(2, 0b00000000) # Continuous sampling
 		scale = 0.92
 
-def read_byte(adr):
+def read_byte(self, adr):
     return bus.read_byte_data(address, adr)
 
-def read_word(adr):
+def read_word(self, adr):
     high = bus.read_byte_data(address, adr)
     low = bus.read_byte_data(address, adr+1)
     val = (high << 8) + low
     return val
 
-def read_word_2c(adr):
+def read_word_2c(self, adr):
     val = read_word(adr)
     if (val >= 0x8000):
         return -((65535 - val) + 1)
     else:
         return val
 
-def write_byte(adr, value):
+def write_byte(self, adr, value):
     self.bus.write_byte_data(address, adr, value)
 
-def openGY87():
+def openGY87(self):
 	DEVICE_ADDRESS = 0x68
 	DEVICE_REG_MODE1 = 0x00
 	DEVICE_REG_LEDOUT0 = 0x1d
@@ -44,7 +44,7 @@ def openGY87():
 	ledout_values = [0x37, 0x02, 0x6A, 0x00, 0x6B, 0x00]
 	self.bus.write_i2c_block_data(DEVICE_ADDRESS, DEVICE_REG_LEDOUT0, ledout_values)
 
-def getDirection():
+def getDirection(self):
 	x_out = read_word_2c(3) * scale
 	y_out = read_word_2c(7) * scale
 	z_out = read_word_2c(5) * scale
