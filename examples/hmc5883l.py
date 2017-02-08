@@ -5,8 +5,17 @@ import smbus
 import time
 import math
 
-bus = smbus.SMBus(1)
-address = 0x1e
+class compass:
+	__init__():
+		bus = smbus.SMBus(1)
+		address = 0x1e
+
+		openGY87()
+
+		write_byte(0, 0b01111000) # Set to 8 samples @ 75Hz
+		write_byte(1, 0b00100000) # 1.3 gain LSb / Gauss 1090 (default)
+		write_byte(2, 0b00000000) # Continuous sampling
+		scale = 0.92
 
 def read_byte(adr):
     return bus.read_byte_data(address, adr)
@@ -35,16 +44,7 @@ def openGY87():
 	ledout_values = [0x37, 0x02, 0x6A, 0x00, 0x6B, 0x00]
 	bus.write_i2c_block_data(DEVICE_ADDRESS, DEVICE_REG_LEDOUT0, ledout_values)
 
-openGY87();
-
-write_byte(0, 0b01111000) # Set to 8 samples @ 75Hz
-write_byte(1, 0b00100000) # 1.3 gain LSb / Gauss 1090 (default)
-write_byte(2, 0b00000000) # Continuous sampling
-
-scale = 0.92
-
-while True:
-
+def getDirection():
 	x_out = read_word_2c(3) * scale
 	y_out = read_word_2c(7) * scale
 	z_out = read_word_2c(5) * scale
@@ -53,5 +53,8 @@ while True:
 	if (bearing < 0):
 	    bearing += 2 * math.pi
 
-	print ("Bearing: ", math.degrees(bearing))
-	time.sleep(0.01)
+	return math.degrees(bearing)
+
+if __name__ == "__main__":
+	com = compass()
+	print(com.getDirection())
