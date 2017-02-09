@@ -34,7 +34,7 @@ class Compass:
 
 	def write_byte(self, adr, value):
 		"Write a single byte via I2C"
-	    self.bus.write_byte_data(self.address, adr, value)
+		self.bus.write_byte_data(self.address, adr, value)
 
 	def openGY87(self):
 		"Enable MPU6050 and its bypass to use the HMC5883l magnetometer directly via I2C"
