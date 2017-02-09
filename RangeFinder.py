@@ -18,7 +18,6 @@ class RangeFinder:
 				else:
 					break
 			except ValueError:
-				print("RangeFinder: Trying to get proper range")
 				continue
 		return line
 
