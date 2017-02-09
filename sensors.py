@@ -24,4 +24,5 @@ class Sensors:
 
 if __name__ == "__main__":
 	sensors = Sensors()
-	sensors.printAllSensorData()
+	while True:
+		sensors.printAllSensorData()
