@@ -9,6 +9,8 @@ class RangeFinder:
 
 	def getRange(self):
 		self.device.flush()
+		self.device.reset_input_buffer()
+		self.device.reset_output_buffer()
 		while True:
 			line = self.device.readline()
 			try: 
