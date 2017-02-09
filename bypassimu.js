@@ -21,7 +21,7 @@ board.on("ready", function() {
 	});
 
 	compass.on("change", function() {
-		console.log("COMPASS: ", exports.moduleState.compass);
+		console.log("COMPASS: ", this.bearing.heading);
 	});
 
 	imu.on("change", function() {
