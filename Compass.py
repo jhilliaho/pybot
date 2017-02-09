@@ -33,16 +33,18 @@ class Compass:
 	        return val
 
 	def write_byte(self, adr, value):
+		"Write a single byte via I2C"
 	    self.bus.write_byte_data(self.address, adr, value)
 
 	def openGY87(self):
+		"Enable MPU6050 and its bypass to use the HMC5883l magnetometer directly via I2C"
 		DEVICE_ADDRESS = 0x68
-
-		self.bus.write_byte_data(DEVICE_ADDRESS, 0x6B, 0x00)
 		self.bus.write_byte_data(DEVICE_ADDRESS, 0x6A, 0x00)
+		self.bus.write_byte_data(DEVICE_ADDRESS, 0x6B, 0x00)
 		self.bus.write_byte_data(DEVICE_ADDRESS, 0x37, 0x02)
 
 	def getDirection(self):
+		"Get current compass bearing"
 		x_out = self.read_word_2c(3) * self.scale
 		y_out = self.read_word_2c(7) * self.scale
 		z_out = self.read_word_2c(5) * self.scale
@@ -52,6 +54,7 @@ class Compass:
 		    bearing += 2 * math.pi
 
 		return round(math.degrees(bearing), 2)
+
 
 if __name__ == "__main__":
 	com = Compass()
