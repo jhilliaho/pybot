@@ -8,9 +8,7 @@ class RangeFinder:
 		self.device = serial.Serial(port=RASPIPORT, baudrate=115200, timeout=0.1)
 
 	def getRange(self):
-		self.device.flush()
 		self.device.reset_input_buffer()
-		self.device.reset_output_buffer()
 		while True:
 			line = self.device.readline()
 			try: 
