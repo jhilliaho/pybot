@@ -19,7 +19,7 @@ class IMU:
 
 	def getGyroData(self):
 		self.getAllData()
-		return self.acceleration
+		return self.gyro
 
 
 if __name__ == "__main__":
