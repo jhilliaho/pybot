@@ -26,7 +26,7 @@ board.on("ready", function() {
 
 	imu.on("change", function() {
 		exports.moduleState.gyro = this.gyro.yaw.angle;
-		console.log("YAW: ", exports.moduleState.gyro);
+		console.log("YAW: ", this.gyro.yaw.angle);
 	});		
 
 	// Event handlers
