@@ -1,8 +1,11 @@
 import serial
 
+RASPIPORT = '/dev/ttyUSB0'
+MACPORT = '/dev/cu.usbserial-AM01TQUH'
+
 class RangeFinder:
 	def __init__(self):
-		self.device = serial.Serial(port='/dev/cu.usbserial-AM01TQUH', baudrate=115200, timeout=0.1)
+		self.device = serial.Serial(port=RASPIPORT, baudrate=115200, timeout=0.1)
 
 	def getRange(self):
 		self.device.flush()
