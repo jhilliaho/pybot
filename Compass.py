@@ -37,10 +37,10 @@ class Compass:
 
 	def openGY87(self):
 		DEVICE_ADDRESS = 0x68
-		DEVICE_REG_LEDOUT0 = 0x00
 
-		ledout_values = [0x37, 0x02, 0x6A, 0x00, 0x6B, 0x00]
-		self.bus.write_i2c_block_data(DEVICE_ADDRESS, DEVICE_REG_LEDOUT0, ledout_values)
+		self.bus.write_byte_data(DEVICE_ADDRESS, 0x6B, 0x00)
+		self.bus.write_byte_data(DEVICE_ADDRESS, 0x6A, 0x00)
+		self.bus.write_byte_data(DEVICE_ADDRESS, 0x37, 0x02)
 
 	def getDirection(self):
 		x_out = self.read_word_2c(3) * self.scale
