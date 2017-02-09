@@ -3,6 +3,7 @@ var Raspi = require("raspi-io");
 var board = new five.Board({
   io: new Raspi()
 });
+var SerialPort = require("serialport");
 
 board.on("ready", function() {
 	board.io.i2cConfig();
