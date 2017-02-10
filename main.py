@@ -13,10 +13,6 @@ print("Alles gut")
 while True:
 	acc = sensors.getAccelerationData()
 	pitch = acc['pitch']
-	#pitch = int(pitch)
-	#print("PITCH: " + str(pitch))
+	pitch = int(400 * pitch)
+	print("PITCH: " + str(pitch))
 	#motors.setSpeeds(-pitch, -pitch)
-
-	#gyro = sensors.getGyroData()
-	#print("x: " + str(round(gyro['x'], 3)) + "y: " + str(round(gyro['y'], 3)) + "z: " + str(round(gyro['z'], 3))) 
-	motors.setSpeeds(100, 100)
