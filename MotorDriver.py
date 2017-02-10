@@ -49,7 +49,6 @@ class MotorDriver:
 
 		self.motor1LastSpeed = motor1Speed
 		self.motor2LastSpeed = motor2Speed
-		print(motor1Speed, " - ", motor2Speed)
 
 		if motor1Speed < -32767 or motor1Speed > 32767:
 			motor1Speed = 0
