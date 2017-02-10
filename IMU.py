@@ -30,7 +30,7 @@ class IMU:
 
 		self.dataCount += 1
 
-		if self.dataCount > averageFrom:
+		if self.dataCount > self.averageFrom:
 			self.acceleration['x'].pop(0)
 			self.acceleration['y'].pop(0)
 			self.acceleration['z'].pop(0)
