@@ -12,7 +12,7 @@ class MotorDriver:
 		self.address = 0x8
 
 	def setSpeeds(self, motor1Speed, motor2Speed):
-	""" Give speeds between -32767 and 32767"""
+		""" Give speeds between -32767 and 32767"""
 		# 0 - 32767 = speed in forward
 		# 32768 and 0 = stop
 		# 32769 - 65535 = speed in backward
