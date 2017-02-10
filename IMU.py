@@ -42,7 +42,7 @@ class IMU:
 			self.acceleration['pitch'].pop(0)
 			self.acceleration['roll'].pop(0)
 
-	def calcAvg(L):
+	def calcAvg(self,L):
 		return sum(L)/len(L)
 
 	def getAccelerationData(self):
@@ -55,10 +55,10 @@ class IMU:
 		gyro = {'x': self.calcAvg(self.gyro['x']), 'y': self.calcAvg(self.gyro['y']), 'z': self.calcAvg(self.gyro['z'])}
 		return gyro
 
-	def calculateRoll(y,z):
+	def calculateRoll(self,y,z):
 		return math.atan2(y, z) * 180/math.pi;
 
-	def calculatePitch(x,y,z):
+	def calculatePitch(self,x,y,z):
 		return math.atan2(-x, math.sqrt(y*y + z*z)) * 180/math.pi;
 
 if __name__ == "__main__":
