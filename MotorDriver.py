@@ -21,7 +21,7 @@ class MotorDriver:
 		if motor1Speed < -32767 or motor1Speed > 32767:
 			motor1Speed = 0
 		
-		if motor2Speed < -32767 or motor1Speed > 32767:
+		if motor2Speed < -32767 or motor2Speed > 32767:
 			motor2Speed = 0
 
 		if motor1Speed < 0:
