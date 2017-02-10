@@ -12,7 +12,6 @@ class Compass:
 		self.bus = smbus.SMBus(1)
 		self.address = 0x1e
 
-		self.openGY87()
 		time.sleep(0.1)
 		self.write_byte(0, 0b01111000) # Set to 8 samples @ 75Hz
 		self.write_byte(1, 0b00100000) # 1.3 gain LSb / Gauss 1090 (default)
