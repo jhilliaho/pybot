@@ -11,7 +11,7 @@ sensors.printAllSensorData()
 print("Alles gut")
 
 while True:
-
+	acc = sensors.getAccelerationData()
 	pitch = acc['pitch']
 	pitch = int(400 * pitch)
 	print("PITCH: " + str(pitch))
