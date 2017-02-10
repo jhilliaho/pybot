@@ -38,7 +38,8 @@ if __name__ == "__main__":
 	
 	for i in range(0, 3000):
 		dr.setSpeeds(10*i,10*i)
-		print(i)
+		print(10*i)
+		time.sleep(0.0003)
 
 	dr.setSpeeds(0,0)
 
