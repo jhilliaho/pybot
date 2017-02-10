@@ -19,7 +19,7 @@ class IMU:
 		z = self.acceleration['z']
 
 		self.acceleration['roll'] = math.atan2(y, z) * 180/math.pi;
-		self.acceleration['pitch'] = math.atan2(-x, sqrt(y*y + z*z)) * 180/math.pi;
+		self.acceleration['pitch'] = math.atan2(-x, math.sqrt(y*y + z*z)) * 180/math.pi;
 
 	def getAccelerationData(self):
 		self.getAllData()
