@@ -18,6 +18,12 @@ class MotorDriver:
 		# 32769 - 65535 = speed in backward
 		# To reverse speed, just add 32768 to it
 		
+		if motor1Speed < -32767 or motor1Speed > 32767:
+			motor1Speed = 0
+		
+		if motor2Speed < -32767 or motor1Speed > 32767:
+			motor2Speed = 0
+
 		if motor1Speed < 0:
 			motor1Speed = (motor1Speed * -1) + 32768
 
