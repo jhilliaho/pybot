@@ -21,6 +21,7 @@ class IMU:
 		self.acceleration['y'].append(data[0]['y'])
 		self.acceleration['z'].append(data[0]['z'])
 
+		self.gyro = data[1]
 
 		self.acceleration['roll'].append(self.calculateRoll(self.acceleration['y'][-1],self.acceleration['z'][-1]))
 		self.acceleration['pitch'].append(self.calculatePitch(self.acceleration['x'][-1],self.acceleration['y'][-1],self.acceleration['z'][-1]))
