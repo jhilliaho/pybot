@@ -58,7 +58,7 @@ class IMU:
 
 	def getGyroData(self):
 		self.calculateAllData()
-		acceleration = {
+		gyro = {
 			'x': self.calcAvg(self.gyro['x']),
 			'y': self.calcAvg(self.gyro['y']),
 			'z': self.calcAvg(self.gyro['z'])
