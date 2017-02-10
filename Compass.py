@@ -20,7 +20,6 @@ class Compass:
 		self.scale = 0.92
 
 		self.bearing = []
-		self.working = true
 
 	def read_byte(self, adr):
 	    return self.bus.read_byte_data(address, adr)
