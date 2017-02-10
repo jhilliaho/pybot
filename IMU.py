@@ -83,8 +83,7 @@ class IMU:
 		#pmax = str(round(max(pitch),2))
 		#pstd = str(round(statistics.stdev(pitch),2))
 		#pmean = str(round(self.calcAvg(pitch),2))
-
-		print("Min: " + pmin + " Max: " + pmax + " Mean: " + pmean + " Std: " + pstd)
+		#print("Min: " + pmin + " Max: " + pmax + " Mean: " + pmean + " Std: " + pstd)
 
 		return acceleration
 
