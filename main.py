@@ -1,6 +1,8 @@
 from Sensors import Sensors
 from MotorDriver import MotorDriver
 
+import time
+
 sensors = Sensors()
 motors = MotorDriver()
 
@@ -14,3 +16,4 @@ while True:
 	pitch = int(pitch)
 	print(pitch)
 	motors.setSpeeds(int(-10 * pitch), int(-10 * pitch))
+	time.sleep(0.2)
