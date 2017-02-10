@@ -8,7 +8,7 @@ import smbus
 
 class IMU:
 	def __init__(self):
-		self.averageFrom = 1
+		self.averageFrom = 10
 
 		self.sensor = mpu6050(0x68)
 		
@@ -81,7 +81,7 @@ class IMU:
 		#pitch = self.acceleration['pitch']
 		#pmin = str(round(min(pitch),2))
 		#pmax = str(round(max(pitch),2))
-		#pstd = str(round(statistics.stdev(pitch),2))
+		print(str(round(statistics.stdev(pitch),2)))
 		#pmean = str(round(self.calcAvg(pitch),2))
 		#print("Min: " + pmin + " Max: " + pmax + " Mean: " + pmean + " Std: " + pstd)
 

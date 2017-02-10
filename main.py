@@ -14,5 +14,5 @@ while True:
 	acc = sensors.getAccelerationData()
 	pitch = acc['pitch']
 	pitch = int(400 * pitch)
-	print("PITCH: " + str(pitch))
+	#print("PITCH: " + str(pitch))
 	#motors.setSpeeds(-pitch, -pitch)
