@@ -7,7 +7,7 @@ import math
 class Compass:
 	def __init__(self):
 
-		self.averageFrom = 5
+		self.averageFrom = 4
 
 		self.bus = smbus.SMBus(1)
 		self.address = 0x1e
