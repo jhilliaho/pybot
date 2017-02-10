@@ -1,5 +1,5 @@
-from Compass import Compass
 from IMU import IMU
+from Compass import Compass
 #from RangeFinder import RangeFinder
 
 class Sensors:
