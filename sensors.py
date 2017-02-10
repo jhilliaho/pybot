@@ -21,6 +21,9 @@ class Sensors:
 		print("Orientation: ", self.orientation)
 		print("Acceleration: ", self.acceleration)
 
+		print("Roll: ", self.acceleration['roll'])
+		print("Pitch: ", self.acceleration['pitch'])
+
 
 if __name__ == "__main__":
 	sensors = Sensors()
