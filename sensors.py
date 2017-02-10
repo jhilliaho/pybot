@@ -16,11 +16,9 @@ class Sensors:
 
 	def printAllSensorData(self):
 		self.updateSensorData()
+		
 		print("Range: ", self.range)
 		print("Direction: ", self.direction)
-		print("Orientation: ", self.orientation)
-		print("Acceleration: ", self.acceleration)
-
 		print("Roll: ", self.acceleration['roll'])
 		print("Pitch: ", self.acceleration['pitch'])
 

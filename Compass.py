@@ -6,6 +6,7 @@ import math
 
 class Compass:
 	def __init__(self):
+
 		self.averageFrom = 10
 
 		self.bus = smbus.SMBus(1)
@@ -19,6 +20,7 @@ class Compass:
 		self.scale = 0.92
 
 		self.bearing = []
+		self.working = true
 
 	def read_byte(self, adr):
 	    return self.bus.read_byte_data(address, adr)
