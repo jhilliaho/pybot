@@ -16,7 +16,7 @@ def calibrate():
 	sum = 0
 	for i in range(100):
 		sum += sensors.getAccelerationData()['pitch']
-	pitchCalibration = sum/100
+	global pitchCalibration = sum/100
 
 calibrate()
 print("Calibration: " + str(pitchCalibration))
