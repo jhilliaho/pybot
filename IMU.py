@@ -28,9 +28,9 @@ class IMU:
 		self.acceleration['roll'].append(self.calculateRoll(self.acceleration['y'][-1],self.acceleration['z'][-1]))
 		self.acceleration['pitch'].append(self.calculatePitch(self.acceleration['x'][-1],self.acceleration['y'][-1],self.acceleration['z'][-1]))
 
-		dataCount += 1
+		self.dataCount += 1
 
-		if dataCount > averageFrom:
+		if self.dataCount > averageFrom:
 			self.acceleration['x'].pop(0)
 			self.acceleration['y'].pop(0)
 			self.acceleration['z'].pop(0)
