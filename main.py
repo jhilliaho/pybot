@@ -28,5 +28,5 @@ while True:
 	pitch = sensors.getAccelerationData()['pitch'] - pitchCalibration
 
 	print("PITCH: " + str(pitch))
-	#if abs(pitch) > 20:
-	#	motors.setSpeeds(-pitch, -pitch)
+	if abs(pitch) > 0.3
+		motors.setSpeeds(-100 * pitch, -100 * pitch)
