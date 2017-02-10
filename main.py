@@ -14,7 +14,7 @@ print("Alles gut")
 while True:
 	acc = sensors.getAccelerationData()
 	pitch = acc['pitch']
-	pitch = int(200 * pitch) - 650
+	pitch = int(20 * pitch) - 65
 
 	print("PITCH: " + str(pitch))
 	if abs(pitch) > 20:
