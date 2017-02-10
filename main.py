@@ -16,7 +16,7 @@ max = 0
 while True:
 	acc = sensors.getAccelerationData()
 	pitch = acc['pitch']
-	pitch = int(400 * pitch) - 1270
+	pitch = float(40 * pitch) - 127
 	if pitch < min:
 		min = pitch
 	if pitch > max:
