@@ -8,7 +8,7 @@ import smbus
 
 class IMU:
 	def __init__(self):
-		self.averageFrom = 4
+		self.averageFrom = 16
 
 		self.sensor = mpu6050(0x68)
 		
