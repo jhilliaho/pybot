@@ -24,7 +24,7 @@ calibrate()
 
 
 while True:
-	pitch = sensors.getAccelerationData()['pitch']
+	pitch = sensors.getAccelerationData()['pitch'] - pitchCalibration
 
 	print("PITCH: " + str(pitch))
 	#if abs(pitch) > 20:
