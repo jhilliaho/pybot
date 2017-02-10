@@ -4,8 +4,8 @@ from Compass import Compass
 
 class Sensors:
 	def __init__(self):
-		self.Compass = Compass()
 		self.IMU = IMU()
+		self.Compass = Compass()
 		#self.RangeFinder = RangeFinder()
 
 	def updateSensorData(self):
