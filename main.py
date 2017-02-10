@@ -17,5 +17,5 @@ while True:
 	pitch = int(40 * pitch) - 127
 
 	print("PITCH: " + str(pitch))
-	if abs(pitch) > 5
+	if abs(pitch) > 5:
 		motors.setSpeeds(-pitch, -pitch)
