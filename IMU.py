@@ -22,10 +22,10 @@ class IMU:
 		addr = 0x68
 		
 		# Register 106 - User control
-		#self.bus.write_byte_data(addr, 0x6A, 0x00)
+		self.bus.write_byte_data(addr, 0x6A, 0x00)
 		
 		# Register 107 - Power management 1
-		#self.bus.write_byte_data(addr, 0x6B, 0x00)
+		self.bus.write_byte_data(addr, 0x6B, 0x00)
 		
 		# Register 55 – INT Pin / Bypass Enable Configuration
 		self.bus.write_byte_data(addr, 0x37, 0x02)
