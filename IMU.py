@@ -25,8 +25,6 @@ class IMU:
 		self.gyro['y'].append(data[1]['y'])
 		self.gyro['z'].append(data[1]['z'])
 
-		self.temperature.append(data[2])
-
 		self.acceleration['roll'].append(self.calculateRoll(self.acceleration['y'],self.acceleration['z']))
 		self.acceleration['pitch'].append(self.calculatePitch(self.acceleration['x'],self.acceleration['y'],self.acceleration['z']))
 
@@ -40,8 +38,6 @@ class IMU:
 			self.gyro['x'].pop(0)
 			self.gyro['y'].pop(0)
 			self.gyro['z'].pop(0)
-
-			self.temperature.pop(0)
 
 			self.acceleration['pitch'].pop(0)
 			self.acceleration['roll'].pop(0)
