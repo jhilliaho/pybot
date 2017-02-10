@@ -19,5 +19,13 @@ def calibrate():
 	pitchCalibration = sum/100
 	print("Calibration: " + str(pitchCalibration))
 
-
 calibrate()
+
+
+
+while True:
+	pitch = sensors.getAccelerationData()['pitch']
+
+	print("PITCH: " + str(pitch))
+	#if abs(pitch) > 20:
+	#	motors.setSpeeds(-pitch, -pitch)
