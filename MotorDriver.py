@@ -45,6 +45,9 @@ if __name__ == "__main__":
 	dr.setSpeeds(-32700, 3000)
 	time.sleep(1)
 
+	dr.setSpeeds(-32768, 40000)
+	time.sleep(1)
+
 
 
 
