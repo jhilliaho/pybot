@@ -36,9 +36,9 @@ class MotorDriver:
 if __name__ == "__main__":
 	dr = MotorDriver()
 	
-	for i in range(-10, 10):
-		dr.setSpeeds(i*100,i*100)
-		time.sleep(0.3)
+	for i in range(-100, 100):
+		dr.setSpeeds(i*300,i*300)
+		time.sleep(0.03)
 
 
 
