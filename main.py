@@ -10,9 +10,28 @@ sensors.printAllSensorData()
 
 print("Alles gut")
 
-while True:
+#while True:
+for i in range(50):
 	acc = sensors.getAccelerationData()
-	pitch = acc['pitch']
-	pitch = int(400 * pitch)
+	sensors.IMU.averageFrom *= 2
+
+for i in range(50):
+	acc = sensors.getAccelerationData()
+	sensors.IMU.averageFrom *= 2
+
+for i in range(50):
+	acc = sensors.getAccelerationData()
+	sensors.IMU.averageFrom *= 2
+
+for i in range(50):
+	acc = sensors.getAccelerationData()
+	sensors.IMU.averageFrom *= 2
+
+
+
+
+
+	#pitch = acc['pitch']
+	#pitch = int(400 * pitch)
 	#print("PITCH: " + str(pitch))
 	#motors.setSpeeds(-pitch, -pitch)
