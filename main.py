@@ -19,3 +19,4 @@ while True:
 
 	gyro = sensors.getGyroData()
 	print(gyro)
+	motors.setSpeeds(100, 100)
