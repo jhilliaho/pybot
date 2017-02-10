@@ -13,7 +13,7 @@ print("Alles gut")
 pitchCalibration = 0
 
 def calibrate():
-	global pitchCalibration = 0
+	global pitchCalibration
 	sum = 0
 	for i in range(100):
 		sum += sensors.getAccelerationData()['pitch']
