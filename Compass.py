@@ -62,7 +62,7 @@ class Compass:
 		if len(self.bearing) > self.averageFrom:
 		 	self.bearing.pop(0)
 
-		 avgBearing = sum(self.bearing)/len(self.bearing)
+		avgBearing = sum(self.bearing)/len(self.bearing)
 
 		return round(math.degrees(avgBearing), 2)
 
