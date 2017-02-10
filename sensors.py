@@ -10,18 +10,29 @@ class Sensors:
 
 	def updateSensorData(self):
 		#self.range = self.RangeFinder.getRange()
-		self.direction = self.Compass.getDirection()
-		self.orientation = self.IMU.getGyroData()
+		self.compassBearing = self.Compass.getcompassBearing()
+		self.gyro = self.IMU.getGyroData()
 		self.acceleration = self.IMU.getAccelerationData()
 
 	def printAllSensorData(self):
 		self.updateSensorData()
 		
 		#print("Range: ", self.range)
-		print("Direction: ", self.direction)
+		print("compassBearing: ", self.compassBearing)
 		print("Roll: ", self.acceleration['roll'])
 		print("Pitch: ", self.acceleration['pitch'])
 
+	def getAccelerationData(self):
+		self.updateSensorData()
+		return self.acceleration
+
+	def getGyroData(self):
+		self.updateSensorData()
+		return self.gyro
+
+	def getCompassBearing(self):
+		self.updateSensorData()
+		return self.compassBearing
 
 if __name__ == "__main__":
 	sensors = Sensors()

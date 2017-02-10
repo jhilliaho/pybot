@@ -5,6 +5,10 @@ sensors = Sensors()
 motors = MotorDriver()
 
 sensors.printAllSensorData()
-motors.setSpeeds(1000,1000)
 
 print("Alles gut")
+
+while True:
+	acc = sensors.getAccelerationData()
+	pitch = acc['pitch']
+	motors.setSpeeds(-10 * pitch, -10 * pitch)
