@@ -10,7 +10,7 @@ class Sensors:
 
 	def updateSensorData(self):
 		#self.range = self.RangeFinder.getRange()
-		self.compassBearing = self.Compass.getcompassBearing()
+		self.compassBearing = self.Compass.getDirection()
 		self.gyro = self.IMU.getGyroData()
 		self.acceleration = self.IMU.getAccelerationData()
 
