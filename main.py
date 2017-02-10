@@ -15,4 +15,4 @@ while True:
 	pitch = acc['pitch'] - 2.7
 	pitch = int(pitch)
 	print("PITCH: " + str(pitch))
-	motors.setSpeeds(1,1)
+	motors.setSpeeds(100,100)
