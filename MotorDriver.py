@@ -6,10 +6,14 @@ import math
 class MotorDriver:
 	def __init__(self):
 
+		self.motorLargestSpeecChange
 		self.averageFrom = 10
 
 		self.bus = smbus.SMBus(1)
 		self.address = 0x8
+
+		self.motor1LastSpeed = 0
+		self.motor2LastSpeed = 0
 
 	def setSpeeds(self, motor1Speed, motor2Speed):
 		""" Give speeds between -32767 and 32767"""
@@ -18,6 +22,18 @@ class MotorDriver:
 		# 32769 - 65535 = speed in backward
 		# To reverse speed, just add 32768 to it
 		
+		if motor1Speed > motor1LastSpeed + self.motorLargestSpeecChange:
+			motor1Speed = motor1LastSpeed + self.motorLargestSpeecChange
+
+		if motor1Speed < motor1LastSpeed - self.motorLargestSpeecChange:
+			motor1Speed = motor1LastSpeed - self.motorLargestSpeecChange
+		
+		if motor2Speed > motor2LastSpeed + self.motorLargestSpeecChange:
+			motor2Speed = motor2LastSpeed + self.motorLargestSpeecChange
+
+		if motor2Speed < motor2LastSpeed - self.motorLargestSpeecChange:
+			motor2Speed = motor2LastSpeed - self.motorLargestSpeecChange
+
 		if motor1Speed < -32767 or motor1Speed > 32767:
 			motor1Speed = 0
 		
@@ -37,8 +53,15 @@ if __name__ == "__main__":
 	dr = MotorDriver()
 	
 	dr.setSpeeds(20000, 20000)
-
-	time.sleep(1)
+	time.sleep(0.3)	
+	dr.setSpeeds(20000, 20000)
+	time.sleep(0.3)	
+	dr.setSpeeds(20000, 20000)
+	time.sleep(0.3)	
+	dr.setSpeeds(20000, 20000)
+	time.sleep(0.3)	
+	dr.setSpeeds(20000, 20000)
+	time.sleep(0.3)	
 
 	dr.setSpeeds(0,0)
 
