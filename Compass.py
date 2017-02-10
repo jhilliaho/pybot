@@ -6,6 +6,8 @@ import math
 
 class Compass:
 	def __init__(self):
+		self.averageFrom = 32
+
 		self.bus = smbus.SMBus(1)
 		self.address = 0x1e
 
@@ -15,6 +17,8 @@ class Compass:
 		self.write_byte(1, 0b00100000) # 1.3 gain LSb / Gauss 1090 (default)
 		self.write_byte(2, 0b00000000) # Continuous sampling
 		self.scale = 0.92
+
+		self.bearing = []
 
 	def read_byte(self, adr):
 	    return self.bus.read_byte_data(address, adr)
@@ -53,7 +57,14 @@ class Compass:
 		if (bearing < 0):
 		    bearing += 2 * math.pi
 
-		return round(math.degrees(bearing), 2)
+		self.bearing.append(bearing)
+		
+		if len(self.bearing) > self.averageFrom:
+		 	self.bearing.pop(0)
+
+		 avgBearing = sum(self.bearing)/len(self.bearing)
+
+		return round(math.degrees(avgBearing), 2)
 
 
 if __name__ == "__main__":
