@@ -25,8 +25,8 @@ class IMU:
 		self.gyro['y'].append(data[1]['y'])
 		self.gyro['z'].append(data[1]['z'])
 
-		self.acceleration['roll'].append(self.calculateRoll(self.acceleration['y'],self.acceleration['z']))
-		self.acceleration['pitch'].append(self.calculatePitch(self.acceleration['x'],self.acceleration['y'],self.acceleration['z']))
+		self.acceleration['roll'].append(self.calculateRoll(self.acceleration['y'][-1],self.acceleration['z'][-1]))
+		self.acceleration['pitch'].append(self.calculatePitch(self.acceleration['x'][-1],self.acceleration['y'][-1],self.acceleration['z'][-1]))
 
 		dataCount += 1
 
