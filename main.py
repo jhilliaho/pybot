@@ -13,6 +13,6 @@ print("Alles gut")
 while True:
 	acc = sensors.getAccelerationData()
 	pitch = acc['pitch'] - 2.7
-	pitch = int(100*pitch)
+	pitch = int(400*pitch)
 	print("PITCH: " + str(pitch))
 	motors.setSpeeds(-pitch, -pitch)
