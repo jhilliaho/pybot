@@ -16,6 +16,10 @@ class MotorDriver:
 		self.motor1LastSpeed = 0
 		self.motor2LastSpeed = 0
 
+	def stopMotors(self):
+		self.bus.write_word_data(8,1,0)
+		self.bus.write_word_data(8,2,0)
+
 	def setSpeeds(self, motor1Speed, motor2Speed):
 		""" Give speeds between -32767 and 32767"""
 		# 0 - 32767 = speed in forward
@@ -23,6 +27,10 @@ class MotorDriver:
 		# 32769 - 65535 = speed in backward
 		# To reverse speed, just add 32768 to it
 		
+		if (motor1Speed == 0 and motor2Speed == 0:
+			self.stopMotors()
+			return
+
 		if motor1Speed > self.motor1LastSpeed + LARGEST_MOTOR_SPEED_CHANGE:
 			motor1Speed = self.motor1LastSpeed + LARGEST_MOTOR_SPEED_CHANGE
 
