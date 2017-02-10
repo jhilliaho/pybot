@@ -14,12 +14,12 @@ class IMU:
 		self.gyro = data[1]
 		self.temperature = data[2]
 
-		x = self.acceleration.x
-		y = self.acceleration.y
-		z = self.acceleration.z
+		x = self.acceleration['x']
+		y = self.acceleration['y']
+		z = self.acceleration['z']
 
-		self.acceleration.roll = math.atan2(y, z) * 180/math.pi;
-		self.acceleration.pitch = math.atan2(-x, sqrt(y*y + z*z)) * 180/math.pi;
+		self.acceleration['roll'] = math.atan2(y, z) * 180/math.pi;
+		self.acceleration.['pitch'] = math.atan2(-x, sqrt(y*y + z*z)) * 180/math.pi;
 
 	def getAccelerationData(self):
 		self.getAllData()
