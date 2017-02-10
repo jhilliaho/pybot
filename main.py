@@ -26,7 +26,7 @@ print("Calibration: " + str(pitchCalibration))
 
 while True:
 	pitch = sensors.getAccelerationData()['pitch'] - pitchCalibration
-	pitchstr = "{:.9f}".format(pitch) 
+	pitchstr = "{:.4f}".format(pitch) 
 
 	print("PITCH: " + pitchstr)
 	if abs(pitch) > 0.3:
