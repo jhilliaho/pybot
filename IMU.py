@@ -3,7 +3,6 @@
 # Fixed self.-bug in get_all_data
 from mpu6050 import mpu6050
 import math
-import numpy
 
 class IMU:
 	def __init__(self):
@@ -47,14 +46,17 @@ class IMU:
 			self.acceleration['pitch'].pop(0)
 			self.acceleration['roll'].pop(0)
 
+	def calcAvg(L):
+		return sum(L)/len(L)
+
 	def getAccelerationData(self):
 		self.calculateAllData()
-		acceleration = {'x': numpy.mean(self.acceleration['x']), 'y': numpy.mean(self.acceleration['y']), 'z': numpy.mean(self.acceleration['z']), 'roll': numpy.mean(self.acceleration['roll']), 'pitch': numpy.mean(self.acceleration['pitch'])}
+		acceleration = {'x': self.calcAvg(self.acceleration['x']), 'y': self.calcAvg(self.acceleration['y']), 'z': self.calcAvg(self.acceleration['z']), 'roll': self.calcAvg(self.acceleration['roll']), 'pitch': self.calcAvg(self.acceleration['pitch'])}
 		return acceleration
 
 	def getGyroData(self):
 		self.calculateAllData()
-		gyro = {'x': numpy.mean(self.gyro['x']), 'y': numpy.mean(self.gyro['y']), 'z': numpy.mean(self.gyro['z'])}
+		gyro = {'x': self.calcAvg(self.gyro['x']), 'y': self.calcAvg(self.gyro['y']), 'z': self.calcAvg(self.gyro['z'])}
 		return gyro
 
 	def calculateRoll(y,z):
