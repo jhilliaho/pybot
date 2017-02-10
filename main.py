@@ -1,4 +1,4 @@
-from Sensors import sensors
+from Sensors import Sensors
 from MotorDriver import MotorDriver
 
 sensors = Sensors()
