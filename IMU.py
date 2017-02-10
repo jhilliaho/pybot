@@ -11,7 +11,7 @@ class IMU:
 		self.sensor = mpu6050(0x68)
 		
 		self.acceleration = {'x': [], 'y': [], 'z': [], 'roll': [], 'pitch': []}
-		self.gyro = {'x': [], 'y': [], 'z': []}
+		self.gyro = {'x': 0, 'y': 0, 'z': 0}
 		self.dataCount = 0
 
 	def calculateAllData(self):
@@ -21,9 +21,6 @@ class IMU:
 		self.acceleration['y'].append(data[0]['y'])
 		self.acceleration['z'].append(data[0]['z'])
 
-		self.gyro['x'].append(data[1]['x'])
-		self.gyro['y'].append(data[1]['y'])
-		self.gyro['z'].append(data[1]['z'])
 
 		self.acceleration['roll'].append(self.calculateRoll(self.acceleration['y'][-1],self.acceleration['z'][-1]))
 		self.acceleration['pitch'].append(self.calculatePitch(self.acceleration['x'][-1],self.acceleration['y'][-1],self.acceleration['z'][-1]))
@@ -34,10 +31,6 @@ class IMU:
 			self.acceleration['x'].pop(0)
 			self.acceleration['y'].pop(0)
 			self.acceleration['z'].pop(0)
-
-			self.gyro['x'].pop(0)
-			self.gyro['y'].pop(0)
-			self.gyro['z'].pop(0)
 
 			self.acceleration['pitch'].pop(0)
 			self.acceleration['roll'].pop(0)
@@ -59,9 +52,9 @@ class IMU:
 	def getGyroData(self):
 		self.calculateAllData()
 		gyro = {
-			'x': self.calcAvg(self.gyro['x']),
-			'y': self.calcAvg(self.gyro['y']),
-			'z': self.calcAvg(self.gyro['z'])
+			'x': self.gyro['x'],
+			'y': self.gyro['y'],
+			'z': self.gyro['z']
 		}
 		return gyro
 
