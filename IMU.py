@@ -37,7 +37,7 @@ class IMU:
 			self.acceleration['roll'].pop(0)
 
 	def calcAvg(self,L):
-		return round(sum(L)/len(L),2)
+		return round(sum(L)/len(L),3)
 
 	def getAccelerationData(self):
 		self.calculateAllData()
