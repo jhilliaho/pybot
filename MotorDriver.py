@@ -49,7 +49,7 @@ class MotorDriver:
 
 		self.bus.write_word_data(8,1,motor1Speed)
 		self.bus.write_word_data(8,2,motor2Speed)
-
+		print(motor1Speed)
 		motor1LastSpeed = motor1Speed
 		motor2LastSpeed = motor2Speed
 
