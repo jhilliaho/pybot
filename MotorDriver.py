@@ -3,10 +3,11 @@ import smbus
 import time
 import math
 
+LARGEST_MOTOR_SPEED_CHANGE = 2500
+
 class MotorDriver:
 	def __init__(self):
 
-		self.motorLargestSpeecChange
 		self.averageFrom = 10
 
 		self.bus = smbus.SMBus(1)
@@ -22,17 +23,17 @@ class MotorDriver:
 		# 32769 - 65535 = speed in backward
 		# To reverse speed, just add 32768 to it
 		
-		if motor1Speed > motor1LastSpeed + self.motorLargestSpeecChange:
-			motor1Speed = motor1LastSpeed + self.motorLargestSpeecChange
+		if motor1Speed > motor1LastSpeed + LARGEST_MOTOR_SPEED_CHANGE:
+			motor1Speed = motor1LastSpeed + LARGEST_MOTOR_SPEED_CHANGE
 
-		if motor1Speed < motor1LastSpeed - self.motorLargestSpeecChange:
-			motor1Speed = motor1LastSpeed - self.motorLargestSpeecChange
+		if motor1Speed < motor1LastSpeed - LARGEST_MOTOR_SPEED_CHANGE:
+			motor1Speed = motor1LastSpeed - LARGEST_MOTOR_SPEED_CHANGE
 		
-		if motor2Speed > motor2LastSpeed + self.motorLargestSpeecChange:
-			motor2Speed = motor2LastSpeed + self.motorLargestSpeecChange
+		if motor2Speed > motor2LastSpeed + LARGEST_MOTOR_SPEED_CHANGE:
+			motor2Speed = motor2LastSpeed + LARGEST_MOTOR_SPEED_CHANGE
 
-		if motor2Speed < motor2LastSpeed - self.motorLargestSpeecChange:
-			motor2Speed = motor2LastSpeed - self.motorLargestSpeecChange
+		if motor2Speed < motor2LastSpeed - LARGEST_MOTOR_SPEED_CHANGE:
+			motor2Speed = motor2LastSpeed - LARGEST_MOTOR_SPEED_CHANGE
 
 		if motor1Speed < -32767 or motor1Speed > 32767:
 			motor1Speed = 0
