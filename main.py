@@ -14,7 +14,7 @@ while True:
 	acc = sensors.getAccelerationData()
 	pitch = acc['pitch']
 	#pitch = int(pitch)
-	print("PITCH: " + str(pitch))
+	#print("PITCH: " + str(pitch))
 	#motors.setSpeeds(-pitch, -pitch)
 
 	#gyro = sensors.getGyroData()
