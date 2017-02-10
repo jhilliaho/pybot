@@ -26,10 +26,14 @@ class MotorDriver:
 		# 32768 and 0 = stop
 		# 32769 - 65535 = speed in backward
 		# To reverse speed, just add 32768 to it
+
+		motor1Speed = int(motor1Speed)
+		motor2Speed = int(motor2Speed)
 		
 		if motor1Speed == 0 and motor2Speed == 0:
 			self.stopMotors()
 			return
+
 
 		if motor1Speed > self.motor1LastSpeed + LARGEST_MOTOR_SPEED_CHANGE:
 			motor1Speed = self.motor1LastSpeed + LARGEST_MOTOR_SPEED_CHANGE
