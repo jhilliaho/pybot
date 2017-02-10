@@ -29,4 +29,4 @@ while True:
 
 	print("PITCH: " + str(pitch))
 	if abs(pitch) > 0.3:
-		motors.setSpeeds(-100 * pitch, -100 * pitch)
+		motors.setSpeeds(-20 * pitch, -20 * pitch)
