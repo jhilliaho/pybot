@@ -47,7 +47,9 @@ class Compass:
 		self.bus.write_byte_data(DEVICE_ADDRESS, 0x6A, 0x00)
 		self.bus.write_byte_data(DEVICE_ADDRESS, 0x6B, 0x00)
 		self.bus.write_byte_data(DEVICE_ADDRESS, 0x37, 0x02)
-		self.bus.write_byte_data(DEVICE_ADDRESS, 0x1A, 0x02)
+		self.bus.write_byte_data(DEVICE_ADDRESS, 0x1A, 0x01)
+
+		# 2: Min: -10.54 Max: 20.88 Mean: 3.02 Std: 7.6
 
 	def getDirection(self):
 		"Get current compass bearing"
