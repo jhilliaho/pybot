@@ -10,12 +10,13 @@ sensors.printAllSensorData()
 
 print("Alles gut")
 
+pitchCalibration = 0
 
-while True:
-	acc = sensors.getAccelerationData()
-	pitch = acc['pitch']
-	pitch = int(50 * pitch) - 180
+def calibrate():
+sum = 0
+for i in range(100):
+	sum += sensors.getAccelerationData()['pitch']
 
-	print("PITCH: " + str(pitch))
-	if abs(pitch) > 20:
-		motors.setSpeeds(-pitch, -pitch)
+pitchCalibration = sum/100
+print("Calibration: " + str(pitchCalibration))
+
