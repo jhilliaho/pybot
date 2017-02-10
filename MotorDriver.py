@@ -38,7 +38,7 @@ if __name__ == "__main__":
 	
 	for i in range(-100, 100):
 		dr.setSpeeds(i*300,i*300)
-		time.sleep(0.03)
+		time.sleep(0.05)
 
 
 
