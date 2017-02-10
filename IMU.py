@@ -6,7 +6,7 @@ import math
 
 class IMU:
 	def __init__(self):
-		self.averageFrom = 16
+		self.averageFrom = 32
 
 		self.sensor = mpu6050(0x68)
 		
@@ -47,7 +47,13 @@ class IMU:
 
 	def getAccelerationData(self):
 		self.calculateAllData()
-		acceleration = {'x': self.calcAvg(self.acceleration['x']), 'y': self.calcAvg(self.acceleration['y']), 'z': self.calcAvg(self.acceleration['z']), 'roll': self.calcAvg(self.acceleration['roll']), 'pitch': self.calcAvg(self.acceleration['pitch'])}
+		acceleration = {
+			'x': round(self.calcAvg(self.acceleration['x']),2),
+			'y': round(self.calcAvg(self.acceleration['y']),2),
+			'z': round(self.calcAvg(self.acceleration['z']),2),
+			'roll': round(self.calcAvg(self.acceleration['roll']),2),
+			'pitch': round(self.calcAvg(self.acceleration['pitch']),2)
+		}
 		return acceleration
 
 	def getGyroData(self):
