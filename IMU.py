@@ -43,22 +43,26 @@ class IMU:
 			self.acceleration['roll'].pop(0)
 
 	def calcAvg(self,L):
-		return sum(L)/len(L)
+		return round(sum(L)/len(L),2)
 
 	def getAccelerationData(self):
 		self.calculateAllData()
 		acceleration = {
-			'x': round(self.calcAvg(self.acceleration['x']),2),
-			'y': round(self.calcAvg(self.acceleration['y']),2),
-			'z': round(self.calcAvg(self.acceleration['z']),2),
-			'roll': round(self.calcAvg(self.acceleration['roll']),2),
-			'pitch': round(self.calcAvg(self.acceleration['pitch']),2)
+			'x': self.calcAvg(self.acceleration['x']),
+			'y': self.calcAvg(self.acceleration['y']),
+			'z': self.calcAvg(self.acceleration['z']),
+			'roll': self.calcAvg(self.acceleration['roll']),
+			'pitch': self.calcAvg(self.acceleration['pitch'])
 		}
 		return acceleration
 
 	def getGyroData(self):
 		self.calculateAllData()
-		gyro = {'x': self.calcAvg(self.gyro['x']), 'y': self.calcAvg(self.gyro['y']), 'z': self.calcAvg(self.gyro['z'])}
+		acceleration = {
+			'x': self.calcAvg(self.gyro['x']),
+			'y': self.calcAvg(self.gyro['y']),
+			'z': self.calcAvg(self.gyro['z'])
+		}
 		return gyro
 
 	def calculateRoll(self,y,z):
