@@ -78,7 +78,7 @@ class IMU:
 		}
 		
 		# Used for calculating basic statistics from accelerometer data
-		#pitch = self.acceleration['pitch']
+		pitch = self.acceleration['pitch']
 		#pmin = str(round(min(pitch),2))
 		#pmax = str(round(max(pitch),2))
 		print(str(round(statistics.stdev(pitch),2)))
