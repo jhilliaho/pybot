@@ -5,6 +5,8 @@ import threading
 from Utilities import *
 
 
+
+
 # Global Server variable
 Server = None
 
@@ -65,11 +67,11 @@ class mainThread(threading.Thread):
 			if abs(motor1Speed) > 10 or abs(motor2Speed) > 10:
 				motors.setSpeeds(motor1Speed, motor2Speed)
 
-			print("PITCH: " + fl2str(pitch) +
-			      " CONTROL X: " + in2str(ctrlx) +
-			      " CONTROL Y: " + in2str(ctrly) +
-			      " MOTOR 1: " + fl2str(motor1Speed) + 
-			      " MOTOR 2: " + fl2str(motor2Speed)
+			print("PITCH: " + float2str(pitch) +
+			      " CONTROL X: " + int2str(ctrlx) +
+			      " CONTROL Y: " + int2str(ctrly) +
+			      " MOTOR 1: " + float2str(motor1Speed) + 
+			      " MOTOR 2: " + float2str(motor2Speed)
 			)
 
 
