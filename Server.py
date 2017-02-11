@@ -30,5 +30,7 @@ def message(sid, data):
 def disconnect(sid):
     print('disconnect ', sid)
 
-app = socketio.Middleware(sio, app)
-eventlet.wsgi.server(eventlet.listen(('', 8000)), app)
+
+def startServer():
+	app = socketio.Middleware(sio, app)
+	eventlet.wsgi.server(eventlet.listen(('', 8000)), app)
