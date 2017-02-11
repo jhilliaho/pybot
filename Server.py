@@ -33,5 +33,3 @@ import os
 	def disconnect(sid):
 	    print('disconnect ', sid)
 
-if __name__ == '__main__':
-	ser = Server()
