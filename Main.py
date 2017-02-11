@@ -57,11 +57,14 @@ class mainThread(threading.Thread):
 				ctrlx = 0
 				ctrly = 0
 
+			ctrlx *= 20
+			ctrly *= 20
+			pitch *= -60
 
-			speedValue = -60 * pitch + ctrly/2
+			speedValue = pitch + ctrly
 
-			motor1Speed = speedValue + ctrlx/4
-			motor2Speed = speedValue - ctrlx/4
+			motor1Speed = speedValue + ctrlx
+			motor2Speed = speedValue - ctrlx
 
 
 			if abs(motor1Speed) > 5 or abs(motor2Speed) > 5:
