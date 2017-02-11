@@ -9,15 +9,14 @@ class Server:
 
 	def __init__(self):
 
+		self.sio = socketio.Server()
 
-	self.sio = socketio.Server()
+		template_dir = os.path.abspath('.')
+		self.app = Flask(__name__, template_folder=template_dir)
 
-	template_dir = os.path.abspath('.')
-	self.app = Flask(__name__, template_folder=template_dir)
+	    self.app = socketio.Middleware(self.sio, self.app)
 
-    self.app = socketio.Middleware(self.sio, self.app)
-
-    eventlet.wsgi.server(eventlet.listen(('', 8000)), self.app)
+	    eventlet.wsgi.server(eventlet.listen(('', 8000)), self.app)
 
 	@self.app.route('/')
 	def index(self):
@@ -39,4 +38,3 @@ class Server:
 
 if __name__ == '__main__':
 	ser = Server()
-	
