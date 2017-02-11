@@ -63,7 +63,7 @@ class mainThread(threading.Thread):
 
 			pid.update(pitch)
 
-			print(float2str(pid.output))
+			#print(float2str(pid.output))
 
 			speedValue = pid.output + ctrly
 
