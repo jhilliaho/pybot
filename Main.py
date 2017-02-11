@@ -42,7 +42,8 @@ class mainThread(threading.Thread):
 			if fl < 0:
 				flstr = "{:.3f}".format(fl) 
 			else:
-				flstr = " {:.3f}".format(fl) 
+				flstr = " {:.3f}".format(fl)
+			return flstr
 
 		while True:
 			controllerData = Server.controllerData
