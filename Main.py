@@ -60,13 +60,12 @@ class mainThread(threading.Thread):
 
 			ctrlx *= 10
 			ctrly *= 10
-			pitch  = pitch * -1
 
 			pid.update(pitch)
 
 			print(float2str(pid.output))
 
-			speedValue = pitch + ctrly
+			speedValue = pid.output + ctrly
 
 			motor1Speed = speedValue + ctrlx
 			motor2Speed = speedValue - ctrlx
