@@ -32,5 +32,7 @@ def disconnect(sid):
 
 
 def startServer():
+	global app
+	global sio
 	app = socketio.Middleware(sio, app)
 	eventlet.wsgi.server(eventlet.listen(('', 8000)), app)
