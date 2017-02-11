@@ -42,7 +42,7 @@ class mainThread(threading.Thread):
 		
 		# P I D
 		print(PID)
-		pid = PID.PID(1, 0, 0.1)
+		pid = PID.PID(1, 0, 0.01)
 		pid.SetPoint = 0.0
 		pid.setSampleTime(0.01)
 
