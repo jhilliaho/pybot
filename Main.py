@@ -40,10 +40,10 @@ class mainThread(threading.Thread):
 
 		def fl2str(fl):
 			if fl < 0:
-				flstr = "{:.2f}".format(fl) 
+				flstr = "{:.1f}".format(fl) 
 			else:
-				flstr = " {:.2f}".format(fl)
-			while len(flstr) < 5:
+				flstr = " {:.1f}".format(fl)
+			while len(flstr) < 7:
 				flstr += " "
 			return flstr
 
