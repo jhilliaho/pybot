@@ -58,13 +58,13 @@ class mainThread(threading.Thread):
 				ctrly = 0
 
 
-			speedValue = -20 * pitch + ctrly/3
+			speedValue = -60 * pitch + ctrly/2
 
-			motor1Speed = speedValue + ctrlx/5
-			motor2Speed = speedValue - ctrlx/5
+			motor1Speed = speedValue + ctrlx/4
+			motor2Speed = speedValue - ctrlx/4
 
 
-			if abs(motor1Speed) > 1 or abs(motor2Speed) > 1:
+			if abs(motor1Speed) > 5 or abs(motor2Speed) > 5:
 				motors.setSpeeds(motor1Speed, motor2Speed)
 
 
