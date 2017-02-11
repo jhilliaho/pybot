@@ -6,7 +6,6 @@ import os
 sio = socketio.Server()
 
 template_dir = os.path.abspath('.')
-print(template_dir)
 app = Flask(__name__, template_folder=template_dir)
 
 @app.route('/')
@@ -18,7 +17,7 @@ def index():
 def connect(sid, environ):
     print("connect ", sid)
 
-@sio.on('chat message')
+@sio.on('controllerDataFromBrowser')
 def message(sid, data):
     print("message ", data)
     sio.emit('reply', room=sid)
