@@ -4,7 +4,9 @@ import eventlet.wsgi
 from flask import Flask, render_template
 
 sio = socketio.Server()
-app = Flask(__name__)
+
+template_dir = os.path.abspath('../../')
+app = Flask(__name__, template_folder=template_dir)
 
 @app.route('/')
 def index():
