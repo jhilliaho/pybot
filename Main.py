@@ -3,7 +3,7 @@ from MotorDriver import MotorDriver
 import time
 import threading
 from Utilities import *
-from PID import PID
+import PID
 
 # Global Server variable
 Server = None
@@ -41,6 +41,7 @@ class mainThread(threading.Thread):
 		controllerData = None
 		
 		# P I D
+		print(PID)
 		pid = PID.PID(0.5, 1, 0.00001)
 		pid.SetPoint(0)
 		pid.SetSampleTime(0.01)
