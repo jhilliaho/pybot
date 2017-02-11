@@ -50,7 +50,7 @@ class mainThread(threading.Thread):
 			try:
 				ctrlx = controllerData['x1']
 				ctrly = controllerData['y1']
-			KeyError:
+			except KeyError:
 				ctrlx = 0
 				ctrly = 0
 
