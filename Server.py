@@ -17,19 +17,16 @@ def index():
 
 @sio.on('connect')
 def connect(sid, environ):
-    print("connect ", sid, environ)
+    print(sid, " connected")
 
 @sio.on('controllerDataFromBrowser')
 def message(sid, data):
     global controllerData
-    #print("SERVER CONTROLLER: ", data)
     controllerData = data
-    #sio.emit('reply')
 
 @sio.on('disconnect')
 def disconnect(sid):
-    print('disconnect ', sid)
-
+    print(sid, " disconnected")
 
 def startServer():
 	global app

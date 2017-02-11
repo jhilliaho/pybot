@@ -1,6 +1,5 @@
 from Sensors import Sensors
 from MotorDriver import MotorDriver
-
 import time
 import threading
 
@@ -9,13 +8,16 @@ Server = None
 
 class serverThread(threading.Thread): #I don't understand this or the next line
 	def run(self):
-		print("Server thread running")
+		print("Starting server thread")
+
 		global Server
 		import Server
 		Server.startServer()
 
 class mainThread(threading.Thread):
 	def run(self):
+		print("Starting main thread")
+
 		global Server
 
 		sensors = Sensors()
@@ -30,7 +32,7 @@ class mainThread(threading.Thread):
 			for i in range(100):
 				sum += sensors.getAccelerationData()['pitch']
 			pitchCalibration = sum/100
-			print("Calibration: " + str(pitchCalibration))
+			print("Pitch calibration: " + str(pitchCalibration))
 
 		calibrate()
 
@@ -45,7 +47,6 @@ class mainThread(threading.Thread):
 				pitchstr = "{:.3f}".format(pitch) 
 			else:
 				pitchstr = " {:.3f}".format(pitch) 		
-			print()
 			
 			try:
 				ctrlx = controllerData['x1']
@@ -56,11 +57,14 @@ class mainThread(threading.Thread):
 
 			print("PITCH: " + pitchstr + " CONTROL DATA:  x: " + str(ctrlx) + " y: " + str(ctrly))
 
-			if abs(pitch) > 0.3:
-				motors.setSpeeds(-20 * pitch, -20 * pitch)
+			speedValue = -20 * pitch + ctrly/10
 
+			motor1Speed = speedValue + ctrlx
+			motor2Speed = speedValue - ctrlx
 
-
+			if abs(motor1Speed) > 0.3 or abs(motor2Speed) > 0.3:
+				motors.setSpeeds(motor1Speed, motor2Speed)
+				print("SPEEDS: ", str(motor1Speed), " ", str(motor2Speed))
 
 
 serverThread().start()
