@@ -71,8 +71,8 @@ class mainThread(threading.Thread):
 			motor2Speed = speedValue - ctrlx
 
 
-			#if abs(motor1Speed) > 10 or abs(motor2Speed) > 10:
-				#motors.setSpeeds(motor1Speed, motor2Speed)
+			if abs(motor1Speed) > 10 or abs(motor2Speed) > 10:
+				motors.setSpeeds(motor1Speed, motor2Speed)
 
 			print("PITCH: " + float2str(pitch) +
 			      " CONTROL X: " + int2str(ctrlx) +
