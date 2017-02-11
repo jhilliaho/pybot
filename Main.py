@@ -3,6 +3,7 @@ from MotorDriver import MotorDriver
 import time
 import threading
 from Utilities import *
+from PID import PID
 
 # Global Server variable
 Server = None
@@ -38,7 +39,12 @@ class mainThread(threading.Thread):
 		calibrate()
 
 		controllerData = None
-			
+		
+		# P I D
+    	pid = PID.PID(0.5, 1, 0.00001)
+		pid.SetPoint(0)
+		pid.SetSampleTime(0.01)
+
 		while True:
 			controllerData = Server.controllerData
 
@@ -55,6 +61,9 @@ class mainThread(threading.Thread):
 			ctrly *= 10
 			pitch  = pitch * -1
 
+			pid.update(pitch)
+			print(pid.output)
+
 			speedValue = pitch + ctrly
 
 			motor1Speed = speedValue + ctrlx
@@ -62,7 +71,7 @@ class mainThread(threading.Thread):
 
 
 			if abs(motor1Speed) > 10 or abs(motor2Speed) > 10:
-				motors.setSpeeds(motor1Speed, motor2Speed)
+				#motors.setSpeeds(motor1Speed, motor2Speed)
 
 			print("PITCH: " + float2str(pitch) +
 			      " CONTROL X: " + int2str(ctrlx) +
