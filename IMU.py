@@ -1,6 +1,6 @@
 from mpu6050 import mpu6050
 import math
-import statistics
+#import statistics
 import smbus
 
 class IMU:
