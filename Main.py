@@ -40,9 +40,11 @@ class mainThread(threading.Thread):
 
 		def fl2str(fl):
 			if fl < 0:
-				flstr = "{:.3f}".format(fl) 
+				flstr = "{:.2f}".format(fl) 
 			else:
-				flstr = " {:.3f}".format(fl)
+				flstr = " {:.2f}".format(fl)
+			while len(str) < 5
+				str += " "
 			return flstr
 
 		while True:
@@ -71,10 +73,10 @@ class mainThread(threading.Thread):
 				motors.setSpeeds(motor1Speed, motor2Speed)
 
 			print("PITCH: " + fl2str(pitch) +
-			      ", CONTROL X: " + str(ctrlx) +
-			      ", CONTROL Y: " + str(ctrly) +
-			      ", MOTOR 1: " + fl2str(motor1Speed) + 
-			      ", MOTOR 2: " + fl2str(motor2Speed)
+			      " CONTROL X: " + str(ctrlx) +
+			      " CONTROL Y: " + str(ctrly) +
+			      " MOTOR 1: " + fl2str(motor1Speed) + 
+			      " MOTOR 2: " + fl2str(motor2Speed)
 			)
 
 
