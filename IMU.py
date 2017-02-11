@@ -1,6 +1,3 @@
-# https://github.com/Tijndagamer/mpu6050
-# pip install mpu6050-raspberrypi
-# Fixed self.-bug in get_all_data
 from mpu6050 import mpu6050
 import math
 import statistics

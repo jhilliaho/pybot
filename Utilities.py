@@ -1,4 +1,3 @@
-
 def float2str(val, precision=1, length=7):
 	if val < 0:
 		flstr = ("{:." + str(precision) + "f}").format(val) 

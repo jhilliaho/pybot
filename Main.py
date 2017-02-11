@@ -4,9 +4,6 @@ import time
 import threading
 from Utilities import *
 
-
-
-
 # Global Server variable
 Server = None
 
@@ -73,7 +70,6 @@ class mainThread(threading.Thread):
 			      " MOTOR 1: " + float2str(motor1Speed) + 
 			      " MOTOR 2: " + float2str(motor2Speed)
 			)
-
 
 serverThread().start()
 mainThread().start()
