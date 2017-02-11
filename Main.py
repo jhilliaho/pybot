@@ -42,7 +42,7 @@ class mainThread(threading.Thread):
 		
 		# P I D
 		print(PID)
-		pid = PID.PID(0.5, 1, 0.00001)
+		pid = PID.PID(0.5, 1, 0)
 		pid.SetPoint = 0.0
 		pid.setSampleTime(0.01)
 
@@ -63,6 +63,7 @@ class mainThread(threading.Thread):
 			pitch  = pitch * -1
 
 			pid.update(pitch)
+
 			print(pid.output)
 
 			speedValue = pitch + ctrly
