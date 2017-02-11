@@ -2,6 +2,8 @@ from Sensors import Sensors
 from MotorDriver import MotorDriver
 import time
 import threading
+from Utilities import *
+
 
 # Global Server variable
 Server = None
@@ -37,25 +39,7 @@ class mainThread(threading.Thread):
 		calibrate()
 
 		controllerData = None
-
-		def fl2str(fl):
-			if fl < 0:
-				flstr = "{:.1f}".format(fl) 
-			else:
-				flstr = " {:.1f}".format(fl)
-			while len(flstr) < 7:
-				flstr += " "
-			return flstr
-
-		def in2str(val):
-			if val < 0:
-				instr = str(val)
-			else:
-				instr = " " + str(val)
-			while len(instr) < 5:
-				instr += " "
-			return instr			
-
+			
 		while True:
 			controllerData = Server.controllerData
 
