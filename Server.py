@@ -11,8 +11,6 @@ app = Flask(__name__, template_folder=template_dir)
 
 app = socketio.Middleware(sio, app)
 
-eventlet.wsgi.server(eventlet.listen(('', 8000)), app)
-
 @app.route('/')
 def index():
     """Serve the client-side application."""
@@ -31,3 +29,4 @@ def message(sid, data):
 def disconnect(sid):
     print('disconnect ', sid)
 
+eventlet.wsgi.server(eventlet.listen(('', 8000)), app)
