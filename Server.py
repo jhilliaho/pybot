@@ -4,32 +4,30 @@ import eventlet.wsgi
 from flask import Flask, render_template
 import os
 
+sio = socketio.Server()
 
+template_dir = os.path.abspath('.')
+app = Flask(__name__, template_folder=template_dir)
 
-	sio = socketio.Server()
+app = socketio.Middleware(sio, app)
 
-	template_dir = os.path.abspath('.')
-	app = Flask(__name__, template_folder=template_dir)
+eventlet.wsgi.server(eventlet.listen(('', 8000)), app)
 
-	app = socketio.Middleware(sio, app)
+@app.route('/')
+def index():
+    """Serve the client-side application."""
+    return render_template('index.html')
 
-	eventlet.wsgi.server(eventlet.listen(('', 8000)), app)
+@sio.on('connect')
+def connect(sid, environ):
+    print("connect ", sid, environ)
 
-	@app.route('/')
-	def index():
-	    """Serve the client-side application."""
-	    return render_template('index.html')
+@sio.on('controllerDataFromBrowser')
+def message(sid, data):
+    print("message ", data)
+    #sio.emit('reply')
 
-	@sio.on('connect')
-	def connect(sid, environ):
-	    print("connect ", sid, environ)
-
-	@sio.on('controllerDataFromBrowser')
-	def message(sid, data):
-	    print("message ", data)
-	    #sio.emit('reply')
-
-	@sio.on('disconnect')
-	def disconnect(sid):
-	    print('disconnect ', sid)
+@sio.on('disconnect')
+def disconnect(sid):
+    print('disconnect ', sid)
 
