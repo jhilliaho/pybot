@@ -22,7 +22,7 @@ class threadTwo(threading.Thread):
 	def run(self):
 		print("Main thread running")
 
-		Global Server
+		global Server
 
 		sensors = Sensors()
 		motors = MotorDriver()
