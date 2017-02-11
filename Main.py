@@ -25,6 +25,7 @@ class threadTwo(threading.Thread):
 
 		global sensors
 		global motors
+		global Server
 
 		pitchCalibration = 0
 
