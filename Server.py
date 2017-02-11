@@ -9,7 +9,6 @@ sio = socketio.Server()
 template_dir = os.path.abspath('.')
 app = Flask(__name__, template_folder=template_dir)
 
-app = socketio.Middleware(sio, app)
 
 @app.route('/')
 def index():
@@ -29,4 +28,5 @@ def message(sid, data):
 def disconnect(sid):
     print('disconnect ', sid)
 
+app = socketio.Middleware(sio, app)
 eventlet.wsgi.server(eventlet.listen(('', 8000)), app)
