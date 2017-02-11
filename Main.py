@@ -14,17 +14,17 @@ print("Alles gut")
 # Global Server variable
 Server = None
 class threadOne(threading.Thread): #I don't understand this or the next line
-    def run(self):
+	def run(self):
 		print("Server thread running")
 		global Server
 		import Server
 
 class threadTwo(threading.Thread):
-    def run(self):
-    	print("Main thread running")
+	def run(self):
+		print("Main thread running")
 
-    	global sensors
-    	global motors
+		global sensors
+		global motors
 
 		pitchCalibration = 0
 
