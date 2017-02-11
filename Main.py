@@ -66,6 +66,7 @@ class mainThread(threading.Thread):
 			#print(float2str(pid.output))
 
 			speedValue = pid.output + ctrly
+			speedValue *= 100
 
 			motor1Speed = speedValue + ctrlx
 			motor2Speed = speedValue - ctrlx
