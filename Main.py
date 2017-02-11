@@ -38,16 +38,17 @@ class mainThread(threading.Thread):
 
 		controllerData = None
 
+		def fl2str(fl):
+			if fl < 0:
+				flstr = "{:.3f}".format(fl) 
+			else:
+				flstr = " {:.3f}".format(fl) 
+
 		while True:
 			controllerData = Server.controllerData
 
 			pitch = sensors.getAccelerationData()['pitch'] - pitchCalibration
-			
-			if pitch < 0:
-				pitchstr = "{:.3f}".format(pitch) 
-			else:
-				pitchstr = " {:.3f}".format(pitch) 		
-			
+						
 			try:
 				ctrlx = controllerData['x1']
 				ctrly = controllerData['y1']
@@ -55,16 +56,23 @@ class mainThread(threading.Thread):
 				ctrlx = 0
 				ctrly = 0
 
-			print("PITCH: " + pitchstr + " CONTROL DATA:  x: " + str(ctrlx) + " y: " + str(ctrly))
 
 			speedValue = -20 * pitch + ctrly/10
 
 			motor1Speed = speedValue + ctrlx
 			motor2Speed = speedValue - ctrlx
 
+
 			if abs(motor1Speed) > 0.3 or abs(motor2Speed) > 0.3:
 				motors.setSpeeds(motor1Speed, motor2Speed)
-				print("SPEEDS: ", str(motor1Speed), " ", str(motor2Speed))
+
+
+
+
+
+
+			print("PITCH: " + fl2str(pitch) + " CONTROL DATA:  x: " + str(ctrlx) + " y: " + str(ctrly))
+			print("SPEEDS: ", fl2str(motor1Speed), " ", fl2str(motor2Speed))
 
 
 serverThread().start()
