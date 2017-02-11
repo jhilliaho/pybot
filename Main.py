@@ -51,6 +51,7 @@ class threadTwo(threading.Thread):
 				controllerData = Serv.controllerData
 			except Exception:
 				print("Server not ready")
+				print(Serv)
 				time.sleep(0.5)
 				continue
 
