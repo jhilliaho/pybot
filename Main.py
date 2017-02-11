@@ -41,7 +41,7 @@ class mainThread(threading.Thread):
 		controllerData = None
 		
 		# P I D
-    	pid = PID.PID(0.5, 1, 0.00001)
+		pid = PID.PID(0.5, 1, 0.00001)
 		pid.SetPoint(0)
 		pid.SetSampleTime(0.01)
 
