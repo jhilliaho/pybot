@@ -71,11 +71,11 @@ class mainThread(threading.Thread):
 				motors.setSpeeds(motor1Speed, motor2Speed)
 
 			print("PITCH: " + fl2str(pitch) +
-			      ", CONTROL DATA: x: " + str(ctrlx) +
-			      ", y: " + str(ctrly) +
+			      ", CONTROL X: " + str(ctrlx) +
+			      ", CONTROL Y: " + str(ctrly) +
 			      ", MOTOR 1: " + fl2str(motor1Speed) + 
 			      ", MOTOR 2: " + fl2str(motor2Speed)
-			     )
+			)
 
 
 serverThread().start()
