@@ -64,7 +64,7 @@ class mainThread(threading.Thread):
 			motor2Speed = speedValue - ctrlx/5
 
 
-			if abs(motor1Speed) > 0.3 or abs(motor2Speed) > 0.3:
+			if abs(motor1Speed) > 1 or abs(motor2Speed) > 1:
 				motors.setSpeeds(motor1Speed, motor2Speed)
 
 
