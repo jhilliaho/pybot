@@ -47,6 +47,15 @@ class mainThread(threading.Thread):
 				flstr += " "
 			return flstr
 
+		def in2str(val):
+			if in < 0:
+				instr = str(val)
+			else:
+				instr = " " + str(val)
+			while len(instr) < 5:
+				instr += " "
+			return instr			
+
 		while True:
 			controllerData = Server.controllerData
 
@@ -73,8 +82,8 @@ class mainThread(threading.Thread):
 				motors.setSpeeds(motor1Speed, motor2Speed)
 
 			print("PITCH: " + fl2str(pitch) +
-			      " CONTROL X: " + fl2str(ctrlx) +
-			      " CONTROL Y: " + fl2str(ctrly) +
+			      " CONTROL X: " + in2str(ctrlx) +
+			      " CONTROL Y: " + in2str(ctrly) +
 			      " MOTOR 1: " + fl2str(motor1Speed) + 
 			      " MOTOR 2: " + fl2str(motor2Speed)
 			)
