@@ -43,8 +43,8 @@ class mainThread(threading.Thread):
 				flstr = "{:.2f}".format(fl) 
 			else:
 				flstr = " {:.2f}".format(fl)
-			while len(str) < 5:
-				str += " "
+			while len(flstr) < 5:
+				flstr += " "
 			return flstr
 
 		while True:
