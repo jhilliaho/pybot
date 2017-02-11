@@ -5,7 +5,7 @@ from flask import Flask, render_template
 
 sio = socketio.Server()
 
-template_dir = os.path.abspath('../../')
+template_dir = os.path.abspath('../../../')
 app = Flask(__name__, template_folder=template_dir)
 
 @app.route('/')
