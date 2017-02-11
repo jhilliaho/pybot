@@ -70,13 +70,11 @@ class mainThread(threading.Thread):
 			if abs(motor1Speed) > 10 or abs(motor2Speed) > 10:
 				motors.setSpeeds(motor1Speed, motor2Speed)
 
-
-
-
-
-
-			print("PITCH: " + fl2str(pitch) + " CONTROL DATA:  x: " + str(ctrlx) + " y: " + str(ctrly))
-			print("SPEEDS: ", fl2str(motor1Speed), " ", fl2str(motor2Speed))
+			print("PITCH: " + fl2str(pitch) +
+			      " CONTROL DATA:  x: " + str(ctrlx) +
+			      " y: " + str(ctrly) +
+			      " SPEEDS: ", fl2str(motor1Speed), " ", fl2str(motor2Speed)
+			     )
 
 
 serverThread().start()
