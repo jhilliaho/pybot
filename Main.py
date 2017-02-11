@@ -43,7 +43,7 @@ class mainThread(threading.Thread):
 		# P I D
 		print(PID)
 		pid = PID.PID(0.5, 1, 0.00001)
-		pid.SetPoint(0)
+		pid.SetPoint = 0.0
 		pid.SetSampleTime(0.01)
 
 		while True:
