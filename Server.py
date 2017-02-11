@@ -17,21 +17,21 @@ class Server:
 
 		eventlet.wsgi.server(eventlet.listen(('', 8000)), self.app)
 
-	@self.app.route('/')
+	@app.route('/')
 	def index(self):
 	    """Serve the client-side application."""
 	    return render_template('index.html')
 
-	@self.sio.on('connect')
+	@sio.on('connect')
 	def connect(self, sid, environ):
 	    print("connect ", sid, environ)
 
-	@self.sio.on('controllerDataFromBrowser')
+	@sio.on('controllerDataFromBrowser')
 	def message(self, sid, data):
 	    print("message ", data)
 	    #sio.emit('reply')
 
-	@self.sio.on('disconnect')
+	@sio.on('disconnect')
 	def disconnect(self, sid):
 	    print('disconnect ', sid)
 
