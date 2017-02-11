@@ -5,34 +5,32 @@ from flask import Flask, render_template
 import os
 
 
-class Server:
 
-	def __init__(self):
-		self.sio = socketio.Server()
+	sio = socketio.Server()
 
-		template_dir = os.path.abspath('.')
-		self.app = Flask(__name__, template_folder=template_dir)
+	template_dir = os.path.abspath('.')
+	app = Flask(__name__, template_folder=template_dir)
 
-		self.app = socketio.Middleware(self.sio, self.app)
+	app = socketio.Middleware(sio, app)
 
-		eventlet.wsgi.server(eventlet.listen(('', 8000)), self.app)
+	eventlet.wsgi.server(eventlet.listen(('', 8000)), app)
 
 	@app.route('/')
-	def index(self):
+	def index():
 	    """Serve the client-side application."""
 	    return render_template('index.html')
 
 	@sio.on('connect')
-	def connect(self, sid, environ):
+	def connect(sid, environ):
 	    print("connect ", sid, environ)
 
 	@sio.on('controllerDataFromBrowser')
-	def message(self, sid, data):
+	def message(sid, data):
 	    print("message ", data)
 	    #sio.emit('reply')
 
 	@sio.on('disconnect')
-	def disconnect(self, sid):
+	def disconnect(sid):
 	    print('disconnect ', sid)
 
 if __name__ == '__main__':
