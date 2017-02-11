@@ -47,8 +47,12 @@ class mainThread(threading.Thread):
 				pitchstr = " {:.3f}".format(pitch) 		
 			print()
 			
-			ctrlx = controllerData['x1']
-			ctrly = controllerData['y1']
+			try:
+				ctrlx = controllerData['x1']
+				ctrly = controllerData['y1']
+			KeyError:
+				ctrlx = 0
+				ctrly = 0
 
 			print("PITCH: " + pitchstr + " CONTROL DATA:  x: " + str(ctrlx) + " y: " + str(ctrly))
 
