@@ -2,7 +2,7 @@ import socketio
 import eventlet
 import eventlet.wsgi
 from flask import Flask, render_template
-
+import os
 sio = socketio.Server()
 
 template_dir = os.path.abspath('../../../')
