@@ -16,6 +16,7 @@ class threadOne(threading.Thread): #I don't understand this or the next line
 		print("Server thread running")
 		global Server
 		import Server
+		Server.startServer()
 
 class threadTwo(threading.Thread):
 	def run(self):
