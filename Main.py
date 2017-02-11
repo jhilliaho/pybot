@@ -9,20 +9,21 @@ import threading
 
 
 # Global Server variable
-Server = None
+Serv = None
 
 class threadOne(threading.Thread): #I don't understand this or the next line
 	def run(self):
 		print("Server thread running")
-		global Server
+		global Serv
 		import Server
+		Serv = Server
 
 
 class threadTwo(threading.Thread):
 	def run(self):
 		print("Main thread running")
 
-		global Server
+		global Serv
 
 		sensors = Sensors()
 		motors = MotorDriver()
@@ -47,7 +48,7 @@ class threadTwo(threading.Thread):
 
 		while True:
 			try:
-				controllerData = Server.controllerData
+				controllerData = Serv.controllerData
 			except Exception:
 				print("Server not ready")
 				time.sleep(0.5)
