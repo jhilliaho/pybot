@@ -5,6 +5,12 @@ import threading
 from Utilities import *
 import PID
 
+# TODO
+# Sensoreille oma thread missä lasketaan arvoja niin nopeaan kuin ehditään
+# Lasketaan anturin asento gyron avulla
+# Lasketaan pitch-arvon keskihajontaa ja resetoidaan gyron laskema arvo pitch-arvolla keskihajonnan ollessa tarpeeksi pieni
+# Säädetään robotin asentoa PID-säätimellä gyrosta saatavan asentotiedon avulla
+
 # Global Server variable
 Server = None
 
