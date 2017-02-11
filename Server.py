@@ -4,11 +4,11 @@ import eventlet.wsgi
 from flask import Flask, render_template
 import os
 
-sio = socketio.Server()
+controllerData = {}
 
+sio = socketio.Server()
 template_dir = os.path.abspath('.')
 app = Flask(__name__, template_folder=template_dir)
-
 
 @app.route('/')
 def index():
@@ -21,7 +21,9 @@ def connect(sid, environ):
 
 @sio.on('controllerDataFromBrowser')
 def message(sid, data):
-    print("message ", data)
+    global controllerData
+    print("controller: ", data)
+    controllerData = data
     #sio.emit('reply')
 
 @sio.on('disconnect')
