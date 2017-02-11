@@ -52,7 +52,7 @@ class threadTwo(threading.Thread):
 			else:
 				pitchstr = " {:.3f}".format(pitch) 		
 			print("PITCH: " + pitchstr)
-			print("CONTROLLER: " + Server.controllerData)
+			#print("CONTROLLER: " + Server.controllerData)
 			if abs(pitch) > 0.3:
 				motors.setSpeeds(-20 * pitch, -20 * pitch)
 
