@@ -45,8 +45,12 @@ class mainThread(threading.Thread):
 				pitchstr = "{:.3f}".format(pitch) 
 			else:
 				pitchstr = " {:.3f}".format(pitch) 		
-			print("PITCH: " + pitchstr)
-			print("MAIN CONTROLLER: " + str(controllerData))
+			print()
+			
+			ctrlx = controllerData['x1']
+			ctrly = controllerData['y1']
+
+			print("PITCH: " + pitchstr + " CONTROL DATA:  x: " + str(ctrlx) + " y: " + str(ctrly))
 
 			if abs(pitch) > 0.3:
 				motors.setSpeeds(-20 * pitch, -20 * pitch)
