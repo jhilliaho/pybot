@@ -60,8 +60,8 @@ class mainThread(threading.Thread):
 
 			speedValue = -20 * pitch + ctrly/10
 
-			motor1Speed = speedValue + ctrlx
-			motor2Speed = speedValue - ctrlx
+			motor1Speed = speedValue + ctrlx/20
+			motor2Speed = speedValue - ctrlx/20
 
 
 			if abs(motor1Speed) > 0.3 or abs(motor2Speed) > 0.3:
