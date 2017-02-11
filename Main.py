@@ -4,30 +4,33 @@ from MotorDriver import MotorDriver
 import time
 import threading
 
-sensors = Sensors()
-motors = MotorDriver()
-sensors.printAllSensorData()
-print("Alles gut")
+
 
 
 
 # Global Server variable
 Server = None
+
 class threadOne(threading.Thread): #I don't understand this or the next line
 	def run(self):
 		print("Server thread running")
 		global Server
 		import Server
 
+
 class threadTwo(threading.Thread):
 	def run(self):
 		print("Main thread running")
 
-		global sensors
-		global motors
-		global Server
+		Global Server
+
+		sensors = Sensors()
+		motors = MotorDriver()
+		sensors.printAllSensorData()
+		print("Alles gut")
 
 		pitchCalibration = 0
+
 
 		def calibrate():
 			global pitchCalibration
@@ -36,9 +39,10 @@ class threadTwo(threading.Thread):
 				sum += sensors.getAccelerationData()['pitch']
 			pitchCalibration = sum/100
 
+
+
 		calibrate()
 		print("Calibration: " + str(pitchCalibration))
-
 
 
 		while True:
@@ -54,6 +58,5 @@ class threadTwo(threading.Thread):
 
 
 
-
-threadOne().start()
 threadTwo().start()
+threadOne().start()
