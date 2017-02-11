@@ -49,7 +49,6 @@ class threadTwo(threading.Thread):
 		while True:
 			try:
 				controllerData = Server.controllerData
-				print("MAIN CONTROLLER: " + controllerData)
 			except Exception:
 				print("Server not ready")
 				print(Server)
@@ -62,6 +61,8 @@ class threadTwo(threading.Thread):
 			else:
 				pitchstr = " {:.3f}".format(pitch) 		
 			print("PITCH: " + pitchstr)
+
+			print("MAIN CONTROLLER: " + controllerData)
 
 			if abs(pitch) > 0.3:
 				motors.setSpeeds(-20 * pitch, -20 * pitch)
