@@ -53,7 +53,7 @@ class mainThread(threading.Thread):
 
 			ctrlx *= 10
 			ctrly *= 10
-			pitch  = pitch * -30
+			pitch  = pitch * -60
 
 			speedValue = pitch + ctrly
 
