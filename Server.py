@@ -22,7 +22,7 @@ def connect(sid, environ):
 @sio.on('controllerDataFromBrowser')
 def message(sid, data):
     global controllerData
-    #print("controller: ", data)
+    print("SERVER CONTROLLER: ", data)
     controllerData = data
     #sio.emit('reply')
 
