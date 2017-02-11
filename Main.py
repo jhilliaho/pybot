@@ -48,7 +48,7 @@ class mainThread(threading.Thread):
 			return flstr
 
 		def in2str(val):
-			if in < 0:
+			if val < 0:
 				instr = str(val)
 			else:
 				instr = " " + str(val)
