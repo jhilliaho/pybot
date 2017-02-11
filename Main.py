@@ -25,7 +25,7 @@ class mainThread(threading.Thread):
 		pitchCalibration = 0
 
 		def calibrate():
-			global pitchCalibration
+			nonlocal pitchCalibration
 			sum = 0
 			for i in range(100):
 				sum += sensors.getAccelerationData()['pitch']
@@ -40,6 +40,7 @@ class mainThread(threading.Thread):
 			controllerData = Server.controllerData
 
 			pitch = sensors.getAccelerationData()['pitch'] - pitchCalibration
+			
 			if pitch < 0:
 				pitchstr = "{:.3f}".format(pitch) 
 			else:
