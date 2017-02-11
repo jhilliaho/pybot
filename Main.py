@@ -46,6 +46,13 @@ class threadTwo(threading.Thread):
 
 
 		while True:
+			try:
+				controllerData = Server.controllerData
+			except Exception:
+				print("Server not ready")
+				time.sleep(0.5)
+				continue
+
 			pitch = sensors.getAccelerationData()['pitch'] - pitchCalibration
 			if pitch < 0:
 				pitchstr = "{:.3f}".format(pitch) 
