@@ -52,5 +52,5 @@ if __name__ == "__main__":
 
 	while True:
 		imu.getAllData()
-		print(self.gyroDistance)
+		print(imu.gyroDistance)
 
